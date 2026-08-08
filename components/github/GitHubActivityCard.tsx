@@ -86,119 +86,50 @@ export function GitHubActivityCard() {
     setLoading(true);
     setError(false);
     try {
-      // 1. Fetch User Profile from official GitHub REST API
-      const userRes = await fetch(`https://api.github.com/users/${username}`, {
-        headers: { Accept: "application/vnd.github.v3+json" },
-      });
+      const res = await fetch("/api/github");
+      if (res.ok) {
+        const data = await res.json();
+        setStats({
+          publicRepos: data.publicRepos,
+          followers: data.followers,
+          totalContributions: data.totalContributions,
+          currentStreak: data.streak,
+          totalStars: data.totalStars,
+        });
 
-      if (!userRes.ok) throw new Error("User API Error");
-      const userData = await userRes.json();
-
-      // 2. Fetch User Repositories sorted by updated date
-      const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=12`, {
-        headers: { Accept: "application/vnd.github.v3+json" },
-      });
-
-      let fetchedRepos: RepositoryData[] = [];
-      if (reposRes.ok) {
-        fetchedRepos = await reposRes.json();
-      }
-
-      // Calculate Stars sum across repos
-      const starsSum = fetchedRepos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
-
-      // Calculate Language usage dynamically from repos
-      const langCounts: Record<string, number> = {};
-      fetchedRepos.forEach((r) => {
-        if (r.language) {
-          langCounts[r.language] = (langCounts[r.language] || 0) + 1;
+        if (Array.isArray(data.contributions) && data.contributions.length > 0) {
+          setDays(
+            data.contributions.map((c: any) => ({
+              date: c.date,
+              count: c.count || 0,
+              level: (c.level || 0) as 0 | 1 | 2 | 3 | 4,
+            }))
+          );
+        } else {
+          setDays(generateContributions());
         }
-      });
 
-      const totalLangs = Object.values(langCounts).reduce((a, b) => a + b, 0) || 1;
-      const langPalette: Record<string, string> = {
-        TypeScript: "#eb6e00",
-        JavaScript: "#ff881a",
-        HTML: "#e34c26",
-        CSS: "#563d7c",
-        Python: "#3572A5",
-        "C++": "#f34b7d",
-      };
+        if (Array.isArray(data.repos) && data.repos.length > 0) {
+          setRepos(data.repos);
+        }
 
-      const computedLangs: LanguageStat[] = Object.entries(langCounts)
-        .map(([name, count]) => ({
-          name,
-          percentage: Math.round((count / totalLangs) * 100),
-          color: langPalette[name] || "#eb6e00",
-        }))
-        .sort((a, b) => b.percentage - a.percentage);
-
-      const generated = generateContributions();
-      const totalContribs = generated.reduce((acc, d) => acc + d.count, 0) + 380;
-
-      setStats({
-        publicRepos: userData.public_repos || fetchedRepos.length || 42,
-        followers: userData.followers || 24,
-        totalContributions: totalContribs,
-        currentStreak: 73,
-        totalStars: starsSum || 182,
-      });
-
-      setDays(generated);
-      setRepos(fetchedRepos.slice(0, 3)); // Top 3 recently updated repos
-      setLanguages(computedLangs.length > 0 ? computedLangs : [
-        { name: "TypeScript", percentage: 52, color: "#eb6e00" },
-        { name: "JavaScript", percentage: 28, color: "#ff881a" },
-        { name: "React", percentage: 12, color: "#61dafb" },
-        { name: "Node.js", percentage: 8, color: "#68a063" },
-      ]);
+        if (Array.isArray(data.languages) && data.languages.length > 0) {
+          setLanguages(data.languages);
+        }
+      } else {
+        throw new Error("API response error");
+      }
     } catch (err) {
       console.warn("GitHub API fallback active:", err);
-      // Fallback architecture if rate-limited or offline
       const generated = generateContributions();
       setStats({
-        publicRepos: 42,
-        followers: 24,
-        totalContributions: 846,
-        currentStreak: 73,
-        totalStars: 182,
+        publicRepos: 15,
+        followers: 0,
+        totalContributions: generated.reduce((acc, d) => acc + d.count, 0),
+        currentStreak: 5,
+        totalStars: 4,
       });
       setDays(generated);
-      setRepos([
-        {
-          id: 1,
-          name: "Synk-IN-Platform",
-          description: "Full-stack event discovery & real-time ticket management platform built with Next.js 15.",
-          html_url: `https://github.com/${username}`,
-          language: "TypeScript",
-          stargazers_count: 48,
-          updated_at: new Date().toISOString(),
-        },
-        {
-          id: 2,
-          name: "ZentoCars",
-          description: "Production car rental booking portal with live inventory management & responsive UI.",
-          html_url: `https://github.com/${username}`,
-          language: "JavaScript",
-          stargazers_count: 32,
-          updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
-        },
-        {
-          id: 3,
-          name: "SMS-Student-Management",
-          description: "Comprehensive student records management portal with REST API architecture.",
-          html_url: `https://github.com/${username}`,
-          language: "TypeScript",
-          stargazers_count: 24,
-          updated_at: new Date(Date.now() - 86400000 * 5).toISOString(),
-        },
-      ]);
-      setLanguages([
-        { name: "TypeScript", percentage: 52, color: "#eb6e00" },
-        { name: "JavaScript", percentage: 28, color: "#ff881a" },
-        { name: "React", percentage: 12, color: "#61dafb" },
-        { name: "Node.js", percentage: 8, color: "#68a063" },
-      ]);
     } finally {
       setLoading(false);
     }
@@ -208,7 +139,7 @@ export function GitHubActivityCard() {
     fetchData();
   }, []);
 
-  // Group contribution days into Months (Month-grouped calendar view)
+  // Group contribution days into Months (Month-grouped calendar view, REVERSED so current month comes FIRST)
   const monthGroups = useMemo<MonthGroup[]>(() => {
     if (days.length === 0) return [];
 
@@ -220,7 +151,7 @@ export function GitHubActivityCard() {
       monthMap[key].push(d);
     });
 
-    return Object.entries(monthMap).map(([monthName, monthDays]) => {
+    const groups = Object.entries(monthMap).map(([monthName, monthDays]) => {
       const grid: (ContributionDay | null)[][] = Array.from({ length: 7 }, () => []);
       const firstDayOfWeek = new Date(monthDays[0].date).getDay();
 
@@ -235,6 +166,9 @@ export function GitHubActivityCard() {
 
       return { monthName, days: grid };
     });
+
+    // Reversing so most recent month (August 2026) appears FIRST!
+    return groups.reverse();
   }, [days]);
 
   // Color mapping according to prompt specifications

@@ -11,7 +11,7 @@ export function GitHubDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/stats/github?username=aniket-upadhyay");
+        const res = await fetch("/api/github");
         if (res.ok) {
           const data = await res.json();
           setStats(data);
