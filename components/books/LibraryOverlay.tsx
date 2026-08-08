@@ -549,35 +549,35 @@ export function LibraryOverlay() {
     >
       <RoomBackground />
       <div className="relative z-10 flex w-full h-full">
-        {/* Left Sidebar */}
-        <div className="w-[28%] flex-shrink-0 flex flex-col px-8 pt-8 overflow-hidden">
+        {/* Left Sidebar - Hidden on mobile (< lg), full width on desktop */}
+        <div className="hidden lg:flex lg:w-[28%] flex-shrink-0 flex-col px-8 pt-8 overflow-hidden">
           <LibrarySidebar books={books} selCat={selectedCategory} setSelCat={setSelectedCategory} />
         </div>
 
         {/* Main Bookshelf Container */}
-        <div className="flex-1 flex flex-col pt-6 pr-8 pb-48 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
+        <div className="flex-1 flex flex-col pt-3 sm:pt-6 px-2 sm:pr-8 pb-28 sm:pb-48 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
           {/* Top Bar Header */}
           <motion.div
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="flex items-center justify-end gap-3 mb-4"
+            className="flex items-center justify-between sm:justify-end gap-2 mb-3 px-1"
           >
             {/* Search Input */}
-            <div className="relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400" />
+            <div className="relative flex-1 sm:flex-initial min-w-[130px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400" />
               <input
                 type="text"
-                placeholder="Search books or authors..."
+                placeholder="Search..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="outline-none text-[11px] text-white placeholder-zinc-500 w-[260px]"
+                className="outline-none text-[11px] text-white placeholder-zinc-500 w-full sm:w-[240px]"
                 style={{
                   background: "rgba(255,255,255,0.06)",
                   backdropFilter: "blur(20px)",
                   border: "1px solid rgba(255,255,255,0.1)",
                   borderRadius: 12,
-                  padding: "8px 16px 8px 36px"
+                  padding: "8px 12px 8px 32px"
                 }}
                 onFocus={e => (e.target.style.borderColor = "rgba(235,110,0,0.5)")}
                 onBlur={e => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
@@ -585,17 +585,17 @@ export function LibraryOverlay() {
             </div>
 
             {/* Category Filter Dropdown */}
-            <div className="relative">
+            <div className="relative flex-shrink-0">
               <select
                 value={selectedCategory}
                 onChange={e => setSelectedCategory(e.target.value)}
-                className="outline-none appearance-none cursor-pointer text-[10px] font-mono text-zinc-300"
+                className="outline-none appearance-none cursor-pointer text-[10px] font-mono text-zinc-300 max-w-[120px] sm:max-w-none truncate"
                 style={{
                   background: "rgba(255,255,255,0.06)",
                   backdropFilter: "blur(20px)",
                   border: "1px solid rgba(255,255,255,0.1)",
                   borderRadius: 12,
-                  padding: "8px 32px 8px 16px"
+                  padding: "8px 26px 8px 10px"
                 }}
               >
                 {["ALL", "Biography", "Business", "Finance", "Self-Improvement"].map(c => (
@@ -604,13 +604,13 @@ export function LibraryOverlay() {
                   </option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3 h-3 text-zinc-400 pointer-events-none" />
+              <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-zinc-400 pointer-events-none" />
             </div>
 
             {/* Close Button */}
             <button
               onClick={() => { setActiveModal(null); setSearchQuery(""); setSelectedCategory("ALL"); }}
-              className="p-2.5 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white transition-all cursor-pointer"
+              className="p-2 sm:p-2.5 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white transition-all cursor-pointer flex-shrink-0"
               title="Close Library"
             >
               <X className="w-4 h-4" />
@@ -622,61 +622,61 @@ export function LibraryOverlay() {
             initial={{ opacity: 0, scale: 0.98, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-1 flex items-stretch relative min-h-[650px] mb-24"
+            className="flex-1 flex items-stretch relative min-h-[520px] sm:min-h-[650px] mb-12 sm:mb-24"
           >
             <div className="absolute inset-x-1/4 top-1/4 bottom-32 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 40%,rgba(180,90,10,0.22) 0%,transparent 70%)", filter: "blur(40px)" }} />
-            <div className="relative flex-1 flex flex-col pb-8" style={{ background: "linear-gradient(180deg,#3e2212 0%,#2d180d 25%,#1e1008 100%)", borderRadius: "40px", border: "1px solid rgba(255,200,80,0.1)", boxShadow: "0 60px 180px rgba(0,0,0,0.9),inset 0 1px 0 rgba(255,200,100,0.12)", overflow: "hidden" }}>
-              <div className="absolute -top-4 left-8 right-8 h-8 pointer-events-none" style={{ background: "linear-gradient(180deg,#5c3318,#3e2212)", borderRadius: "50%", boxShadow: "0 -3px 24px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,200,100,0.18)" }} />
+            <div className="relative flex-1 flex flex-col pb-6 sm:pb-8 rounded-2xl sm:rounded-[40px]" style={{ background: "linear-gradient(180deg,#3e2212 0%,#2d180d 25%,#1e1008 100%)", border: "1px solid rgba(255,200,80,0.1)", boxShadow: "0 60px 180px rgba(0,0,0,0.9),inset 0 1px 0 rgba(255,200,100,0.12)", overflow: "hidden" }}>
+              <div className="absolute -top-4 left-4 right-4 sm:left-8 sm:right-8 h-8 pointer-events-none" style={{ background: "linear-gradient(180deg,#5c3318,#3e2212)", borderRadius: "50%", boxShadow: "0 -3px 24px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,200,100,0.18)" }} />
               {[12, 32, 52, 72, 90].map(pct => (
                 <div key={pct} className="absolute pointer-events-none" style={{ top: 2, left: `${pct}%` }}>
                   <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#fef9c3", boxShadow: "0 0 10px 4px rgba(254,249,195,0.9),0 0 24px 8px rgba(251,191,36,0.5)" }} />
                   <div className="absolute top-2.5 -left-6 w-14 h-28 opacity-10 pointer-events-none" style={{ background: "linear-gradient(180deg,rgba(254,243,191,0.9),transparent)", clipPath: "polygon(30% 0,70% 0,100% 100%,0 100%)", filter: "blur(8px)" }} />
                 </div>
               ))}
-              <div className="absolute top-0 bottom-0 left-0 w-10" style={{ background: "linear-gradient(90deg,#1a0c05,#2d1810)", borderRadius: "52px 0 0 28px" }} />
-              <div className="absolute top-0 bottom-0 right-0 w-10" style={{ background: "linear-gradient(270deg,#1a0c05,#2d1810)", borderRadius: "0 52px 28px 0" }} />
+              <div className="absolute top-0 bottom-0 left-0 w-3 sm:w-10" style={{ background: "linear-gradient(90deg,#1a0c05,#2d1810)", borderRadius: "24px 0 0 28px" }} />
+              <div className="absolute top-0 bottom-0 right-0 w-3 sm:w-10" style={{ background: "linear-gradient(270deg,#1a0c05,#2d1810)", borderRadius: "0 24px 28px 0" }} />
 
-              <div className="pt-8 px-10">
+              <div className="pt-6 sm:pt-8 px-3 sm:px-10 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
                 <ShelfRow lightOpacity={0.9}>
                   <PlantPot />
                   {r1.map(b => <BookSpine key={b.id} book={b} isHighlighted={hi(b)} onClick={() => setSelectedBookId(b.id)} />)}
                   {Array.from({ length: Math.max(0, 3 - r1.length) }).map((_, i) => (
                     <div key={`f1-${i}`} className="flex-shrink-0" style={{ width: 14 + i * 4, height: 96, background: `hsl(${20 + i * 15},30%,${12 + i * 3}%)`, borderRadius: 2, boxShadow: "inset 2px 0 4px rgba(0,0,0,0.4)" }} />
                   ))}
-                  <div className="flex-1" />
+                  <div className="flex-1 min-w-[8px]" />
                   <DeskLamp /><StackedBooks count={3} />
                 </ShelfRow>
               </div>
 
-              <div className="px-10">
+              <div className="px-3 sm:px-10 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
                 <ShelfRow lightOpacity={0.80}>
                   <VintageGlobe />
-                  <div className="flex items-end gap-0.5 flex-shrink-0">
+                  <div className="flex items-end gap-0.5 flex-shrink-0 hidden sm:flex">
                     {[14, 16, 12, 15, 13, 16].map((w, i) => (
                       <div key={i} className="rounded-sm" style={{ width: w, height: 76 + (i % 3) * 8, background: `hsl(${20 + i * 18},25%,${10 + i * 2}%)`, boxShadow: "inset 1px 0 3px rgba(0,0,0,0.5)" }} />
                     ))}
                   </div>
                   {r2.map(b => <BookSpine key={b.id} book={b} isHighlighted={hi(b)} onClick={() => setSelectedBookId(b.id)} />)}
-                  <div className="flex-1" />
+                  <div className="flex-1 min-w-[8px]" />
                   <Candle /><ReadingGlasses /><PlantPot />
                 </ShelfRow>
               </div>
 
-              <div className="px-10">
+              <div className="px-3 sm:px-10 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
                 <ShelfRow lightOpacity={0.70}>
-                  <PlantPot /><StackedBooks count={5} />
+                  <PlantPot /><StackedBooks count={3} />
                   {r3.map(b => <BookSpine key={b.id} book={b} isHighlighted={hi(b)} onClick={() => setSelectedBookId(b.id)} />)}
-                  <div className="flex-1" />
+                  <div className="flex-1 min-w-[8px]" />
                   <CoffeeMug /><AstrolabeDecor />
                 </ShelfRow>
               </div>
 
-              <div className="mx-6 mt-1 mb-4 rounded" style={{ height: 14, background: "linear-gradient(180deg,#4a2a14,#2a1508)", boxShadow: "0 6px 20px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,180,80,0.08)" }} />
+              <div className="mx-3 sm:mx-6 mt-1 mb-3 sm:mb-4 rounded" style={{ height: 12, background: "linear-gradient(180deg,#4a2a14,#2a1508)", boxShadow: "0 6px 20px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,180,80,0.08)" }} />
             </div>
           </motion.div>
 
-          <div className="text-center pt-3 pointer-events-none">
-            <span className="text-[9px] font-mono text-zinc-400 tracking-[0.2em] uppercase">Hover book to buy on Amazon · Click book to view notes</span>
+          <div className="text-center pt-1 pb-4 pointer-events-none">
+            <span className="text-[9px] font-mono text-zinc-400 tracking-[0.15em] uppercase">Click book to buy on Amazon or view notes</span>
           </div>
         </div>
       </div>
