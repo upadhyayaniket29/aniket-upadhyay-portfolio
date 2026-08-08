@@ -15,16 +15,16 @@ export default function ResumeModalContent() {
   return (
     <div className="w-full max-w-[900px] mx-auto pb-16">
       {/* Top Action Bar */}
-      <div className="w-full bg-[#141416] border border-white/10 rounded-xl p-3.5 sm:p-4 mb-6 sm:mb-8 flex flex-wrap items-center justify-between gap-3 shadow-lg">
-        <div className="flex items-center gap-2.5 text-zinc-300">
-          <FileText className="w-4 h-4 text-[#eb6e00]" />
-          <span className="text-xs font-mono font-semibold">Aniket_Upadhyay_Resume.pdf</span>
+      <div className="w-full bg-[#141416] border border-white/10 rounded-xl p-3 sm:p-4 mb-6 sm:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
+        <div className="flex items-center gap-2 text-zinc-300 min-w-0 w-full sm:w-auto">
+          <FileText className="w-4 h-4 text-[#eb6e00] flex-shrink-0" />
+          <span className="text-xs font-mono font-semibold truncate">Aniket_Upadhyay_Resume.pdf</span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={handleCopyLink}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/10 border border-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-colors cursor-pointer"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg hover:bg-white/10 border border-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-colors cursor-pointer whitespace-nowrap"
           >
             {copied ? (
               <>
@@ -43,7 +43,7 @@ export default function ResumeModalContent() {
             download="Aniket_Upadhyay_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#eb6e00] hover:bg-[#ff8a1c] text-white text-xs font-mono font-bold transition-all cursor-pointer shadow-[0_0_15px_rgba(235,110,0,0.4)] hover:shadow-[0_0_20px_rgba(235,110,0,0.6)] active:scale-95"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#eb6e00] hover:bg-[#ff8a1c] text-white text-xs font-mono font-bold transition-all cursor-pointer shadow-[0_0_15px_rgba(235,110,0,0.4)] active:scale-95 whitespace-nowrap"
           >
             <Download className="w-4 h-4 text-white" />
             <span>Download PDF</span>

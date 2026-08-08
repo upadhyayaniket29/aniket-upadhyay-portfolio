@@ -105,12 +105,12 @@ export function ModalWindow({ id, title, size = "lg", children }: ModalWindowPro
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: isFullScreenOnMobile ? 0 : 20 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className={`relative w-full ${sizeClasses[size]} ${containerResponsiveClasses} border border-white/10 bg-[#0a0a0a] shadow-2xl flex flex-col overflow-y-auto custom-scrollbar pointer-events-auto scroll-smooth pb-32`}
+            className={`relative w-full ${sizeClasses[size]} ${containerResponsiveClasses} border border-white/10 bg-[#0a0a0a] shadow-2xl flex flex-col overflow-y-auto custom-scrollbar pointer-events-auto scroll-smooth pb-44 sm:pb-36`}
           >
             {/* Window Header Top Bar */}
-            <div className="sticky top-0 z-50 flex items-center justify-between px-5 py-3.5 border-b border-white/5 bg-[#050505] select-none shadow-sm pt-[calc(0.875rem+env(safe-area-inset-top))]">
+            <div className="sticky top-0 z-50 flex items-center justify-between px-3 sm:px-5 py-2.5 sm:py-3.5 border-b border-white/5 bg-[#050505] select-none shadow-sm pt-[calc(0.75rem+env(safe-area-inset-top))]">
                 {/* macOS window control orbs */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                   <button
                     onClick={() => setActiveModal(null)}
                     className="w-4 h-4 sm:w-3 sm:h-3 rounded-full bg-[#ff5f56] hover:bg-[#ff5f56]/85 transition-colors flex items-center justify-center cursor-pointer group"
@@ -123,7 +123,7 @@ export function ModalWindow({ id, title, size = "lg", children }: ModalWindowPro
                 </div>
 
                 {/* Tiny Title */}
-                <span className="text-[10px] sm:text-xs text-zinc-400 font-mono font-semibold uppercase tracking-wider">
+                <span className="text-[10px] sm:text-xs text-zinc-400 font-mono font-semibold uppercase tracking-wider truncate px-1 max-w-[130px] sm:max-w-none">
                   {title}
                 </span>
 
@@ -134,13 +134,13 @@ export function ModalWindow({ id, title, size = "lg", children }: ModalWindowPro
                     download="Aniket_Upadhyay_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#eb6e00] hover:bg-[#ff8a1c] text-white text-[10px] font-mono font-bold transition-all cursor-pointer shadow-[0_0_10px_rgba(235,110,0,0.3)] active:scale-95"
+                    className="flex-shrink-0 flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded bg-[#eb6e00] hover:bg-[#ff8a1c] text-white text-[9px] sm:text-[10px] font-mono font-bold transition-all cursor-pointer shadow-[0_0_10px_rgba(235,110,0,0.3)] active:scale-95 whitespace-nowrap"
                   >
                     <Download className="w-3 h-3 text-white" />
-                    <span>Download PDF</span>
+                    <span>Download</span>
                   </a>
                 ) : (
-                  <div className="w-6 sm:w-12" />
+                  <div className="w-4 sm:w-12" />
                 )}
               </div>
 
