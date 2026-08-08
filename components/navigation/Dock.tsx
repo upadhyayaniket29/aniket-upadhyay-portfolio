@@ -37,16 +37,27 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [magneticPos, setMagneticPos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
   const hoverTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // Classic macOS Dock magnification (Subtle curve: 48px to 56px)
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const baseSize = isMobile ? 36 : 48;
+  const targetSize = isMobile ? 40 : 56;
+
+  // Classic macOS Dock magnification
   const distance = useTransform(mouseX, (val: number) => {
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
     return val - bounds.x - bounds.width / 2;
   });
 
-  const widthTransform = useTransform(distance, [-100, 0, 100], [48, 56, 48]);
-  const heightTransform = useTransform(distance, [-100, 0, 100], [48, 56, 48]);
+  const widthTransform = useTransform(distance, [-100, 0, 100], [baseSize, targetSize, baseSize]);
+  const heightTransform = useTransform(distance, [-100, 0, 100], [baseSize, targetSize, baseSize]);
 
   const width = useSpring(widthTransform, {
     mass: 0.1,
@@ -78,7 +89,7 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
 
   // CAP mouse pull at 4px for magnetic offset
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || isMobile) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -123,7 +134,7 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
       tabIndex={0}
       onFocus={() => setShowTooltip(true)}
       onBlur={() => setShowTooltip(false)}
-      whileTap={{ scale: 0.95, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+      whileTap={{ scale: 0.92, transition: { type: "spring", stiffness: 400, damping: 25 } }}
       className="relative flex-shrink-0 flex items-center justify-center rounded-full cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-[#eb6e00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] select-none pointer-events-auto"
       style={{ cursor: "pointer" }}
     >
@@ -138,10 +149,10 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
         transition={{ type: "spring", stiffness: 350, damping: 24 }}
         className={`flex items-center justify-center rounded-full border transition-colors duration-200 relative ${
           isActive
-            ? "border-[#eb6e00]/30 bg-gradient-to-b from-[#eb6e00]/10 to-[#eb6e00]/5 text-[#eb6e00] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_2px_8px_rgba(235,110,0,0.15)]"
+            ? "border-[#eb6e00]/50 bg-gradient-to-b from-[#eb6e00]/20 to-[#eb6e00]/10 text-[#eb6e00] shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_2px_12px_rgba(235,110,0,0.3)]"
             : isHovered
-              ? "border-white/10 bg-white/[0.04] text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]"
-              : "border-transparent bg-transparent text-[#a1a1aa]"
+              ? "border-white/15 bg-white/[0.08] text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]"
+              : "border-transparent bg-transparent text-zinc-400 hover:text-white"
         }`}
       >
         {icon}
@@ -153,7 +164,7 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            className="absolute -bottom-2 w-1 h-1 rounded-full bg-[#eb6e00] shadow-[0_0_6px_rgba(235,110,0,0.6)]"
+            className="absolute -bottom-1.5 sm:-bottom-2 w-1 h-1 rounded-full bg-[#eb6e00] shadow-[0_0_6px_rgba(235,110,0,0.8)]"
             transition={{
               type: "spring",
               stiffness: 320,
@@ -164,7 +175,7 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
         )}
       </motion.div>
 
-      {/* Floating minimal text label with micro accent dot (Apple/Linear style) */}
+      {/* Floating minimal text label with micro accent dot */}
       <AnimatePresence>
         {showTooltip && (
           <motion.div
@@ -172,18 +183,11 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.92 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            style={{ bottom: "100%", marginBottom: "16px", left: "50%", x: "-50%" }}
+            style={{ bottom: "100%", marginBottom: "12px", left: "50%", x: "-50%" }}
             className="absolute z-50 flex flex-col items-center pointer-events-none select-none"
           >
-            <span className="font-mono text-[10px] font-semibold tracking-widest text-white uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <span className="font-mono text-[9px] sm:text-[10px] font-semibold tracking-widest text-white uppercase bg-black/90 px-2 py-0.5 rounded-full border border-white/10 shadow-lg">
               {label}
-            </span>
-            <span
-              className={`text-[8px] leading-none mt-0.5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] ${
-                isActive ? "text-[#eb6e00]" : "text-zinc-500"
-              }`}
-            >
-              ●
             </span>
           </motion.div>
         )}
@@ -227,7 +231,7 @@ export function Dock() {
   ];
 
   return (
-    <div className="fixed bottom-2 sm:bottom-4 left-0 right-0 flex justify-center z-50 pointer-events-none px-2 sm:px-4 pb-[env(safe-area-inset-bottom)]">
+    <div className="fixed bottom-2 sm:bottom-4 left-0 right-0 flex justify-center z-50 pointer-events-none px-1.5 sm:px-4 pb-[env(safe-area-inset-bottom)]">
       <motion.div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -239,26 +243,20 @@ export function Dock() {
           damping: 22,
           delay: 0.4,
         }}
-        className="relative flex items-end gap-1 sm:gap-3 px-2 sm:px-4 py-1.5 sm:py-3 rounded-[20px] sm:rounded-[24px] pointer-events-auto max-w-[calc(100vw-16px)] sm:max-w-full overflow-x-auto sm:overflow-visible shadow-[0_4px_12px_rgba(0,0,0,0.1),0_24px_48px_rgba(0,0,0,0.2),0_2px_4px_rgba(0,0,0,0.4)]"
-        style={{ scrollbarWidth: "none" }}
+        className="relative flex items-center justify-start sm:justify-center gap-0.5 sm:gap-2.5 px-2 sm:px-4 py-1.5 sm:py-2.5 rounded-full pointer-events-auto max-w-[calc(100vw-12px)] sm:max-w-full overflow-x-auto sm:overflow-visible bg-[#0c0c0e]/95 sm:bg-[#050505]/40 backdrop-blur-2xl border border-white/15 shadow-[0_10px_35px_rgba(0,0,0,0.95)]"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {/* Layer 1: Subtle Backdrop Blur */}
-        <div className="absolute inset-0 rounded-[24px] backdrop-blur-[18px] -z-10" />
+        {/* Layer 1: Frosted Opacity Mask (Opaque on mobile to eliminate text bleed-through) */}
+        <div className="absolute inset-0 rounded-full bg-[#0a0a0c]/90 sm:bg-[#050505]/30 -z-10" />
         
-        {/* Layer 2: Low Opacity Frosted Tint */}
-        <div className="absolute inset-0 rounded-[24px] bg-[#050505]/30 -z-10" />
+        {/* Layer 2: Specular highlight */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.06] to-transparent -z-10" />
 
-        {/* Layer 3: Inner Light Diffusion */}
-        <div className="absolute inset-0 rounded-[24px] bg-gradient-to-b from-white/[0.04] to-transparent -z-10" />
+        {/* Layer 3: Soft Highlight Reflection */}
+        <div className="absolute inset-0 rounded-full pointer-events-none -z-10 transition-opacity duration-200" style={reflectionStyle} />
 
-        {/* Layer 4: Extremely Faint Noise Texture */}
-        <div className="absolute inset-0 rounded-[24px] opacity-[0.012] mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E')] -z-10" />
-
-        {/* Layer 5: Soft Highlight Reflection (Mouse tracking) */}
-        <div className="absolute inset-0 rounded-[24px] pointer-events-none -z-10 transition-opacity duration-200" style={reflectionStyle} />
-
-        {/* Layer 6: Soft Multi-Layer Border (Outer border + Inner highlight) */}
-        <div className="absolute inset-0 rounded-[24px] border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.04),inset_0_-1px_1px_rgba(0,0,0,0.2)] pointer-events-none -z-10" />
+        {/* Layer 4: Border Ring */}
+        <div className="absolute inset-0 rounded-full border border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] pointer-events-none -z-10" />
 
         {items.map((item) => (
           <DockItem
