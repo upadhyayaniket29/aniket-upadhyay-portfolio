@@ -47,8 +47,8 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const baseSize = isMobile ? 36 : 48;
-  const targetSize = isMobile ? 40 : 56;
+  const baseSize = isMobile ? 30 : 48;
+  const targetSize = isMobile ? 34 : 56;
 
   // Classic macOS Dock magnification
   const distance = useTransform(mouseX, (val: number) => {
@@ -164,7 +164,7 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            className="absolute -bottom-1.5 sm:-bottom-2 w-1 h-1 rounded-full bg-[#eb6e00] shadow-[0_0_6px_rgba(235,110,0,0.8)]"
+            className="absolute -bottom-1 sm:-bottom-2 w-1 h-1 rounded-full bg-[#eb6e00] shadow-[0_0_6px_rgba(235,110,0,0.8)]"
             transition={{
               type: "spring",
               stiffness: 320,
@@ -243,8 +243,7 @@ export function Dock() {
           damping: 22,
           delay: 0.4,
         }}
-        className="relative flex items-center justify-start sm:justify-center gap-0.5 sm:gap-2.5 px-2 sm:px-4 py-1.5 sm:py-2.5 rounded-full pointer-events-auto max-w-[calc(100vw-12px)] sm:max-w-full overflow-x-auto sm:overflow-visible bg-[#0c0c0e]/95 sm:bg-[#050505]/40 backdrop-blur-2xl border border-white/15 shadow-[0_10px_35px_rgba(0,0,0,0.95)]"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="relative flex items-center justify-between sm:justify-center gap-0.5 sm:gap-2.5 px-2 sm:px-4 py-1.5 sm:py-2.5 rounded-full pointer-events-auto w-full max-w-[calc(100vw-16px)] sm:max-w-max bg-[#0c0c0e]/95 sm:bg-[#050505]/40 backdrop-blur-2xl border border-white/15 shadow-[0_10px_35px_rgba(0,0,0,0.95)]"
       >
         {/* Layer 1: Frosted Opacity Mask (Opaque on mobile to eliminate text bleed-through) */}
         <div className="absolute inset-0 rounded-full bg-[#0a0a0c]/90 sm:bg-[#050505]/30 -z-10" />
