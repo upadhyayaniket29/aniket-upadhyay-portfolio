@@ -360,7 +360,7 @@ export function GitHubActivityCard() {
           )}
         </AnimatePresence>
 
-        {/* 4 Premium Stat Cards */}
+        {/* 4 Real-Time GitHub Stat Cards */}
         <div className="py-6 border-b border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/15 transition-all duration-300 flex flex-col justify-between group">
             <div className="flex items-center justify-between text-zinc-500 mb-1">
@@ -368,9 +368,9 @@ export function GitHubActivityCard() {
               <GitCommit className="w-4 h-4 text-[#eb6e00] group-hover:scale-110 transition-transform" />
             </div>
             <span className="text-2xl font-bold text-white font-display">
-              {stats ? `${stats.totalContributions}+` : "846+"}
+              {stats ? `${stats.totalContributions}+` : "348+"}
             </span>
-            <span className="text-[10px] text-zinc-500 font-mono mt-0.5">This year</span>
+            <span className="text-[10px] text-zinc-500 font-mono mt-0.5">All time / 1 year</span>
           </div>
 
           <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/15 transition-all duration-300 flex flex-col justify-between group">
@@ -379,7 +379,7 @@ export function GitHubActivityCard() {
               <Flame className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
             </div>
             <span className="text-2xl font-bold text-white font-display">
-              {stats ? `${stats.currentStreak} Days` : "73 Days"}
+              {stats ? `${stats.currentStreak} Days` : "7 Days"}
             </span>
             <span className="text-[10px] text-emerald-400 font-mono mt-0.5">Active streak</span>
           </div>
@@ -390,7 +390,7 @@ export function GitHubActivityCard() {
               <GitFork className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
             </div>
             <span className="text-2xl font-bold text-white font-display">
-              {stats ? `${stats.publicRepos}` : "42"}
+              {stats ? `${stats.publicRepos}` : "54"}
             </span>
             <span className="text-[10px] text-zinc-500 font-mono mt-0.5">Public repos</span>
           </div>
@@ -401,7 +401,7 @@ export function GitHubActivityCard() {
               <Star className="w-4 h-4 text-yellow-500 group-hover:scale-110 transition-transform" />
             </div>
             <span className="text-2xl font-bold text-white font-display">
-              {stats ? `${stats.totalStars}` : "182"}
+              {stats ? `${stats.totalStars}` : "20"}
             </span>
             <span className="text-[10px] text-zinc-500 font-mono mt-0.5">Stars earned</span>
           </div>
