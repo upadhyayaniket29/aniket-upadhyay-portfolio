@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 
-// Server-side persistent state for portfolio visitor count
-let totalViews = 12048;
+// Server-side persistent state starting from default 101
+let totalViews = 101;
 const activeSessions = new Set<string>();
 
 export async function GET() {
-  // Simulate active online visitors between 3 and 6
-  const onlineCount = Math.floor(Math.random() * 4) + 3;
+  const onlineCount = Math.floor(Math.random() * 3) + 2;
 
   return NextResponse.json({
     views: totalViews,
@@ -22,15 +21,17 @@ export async function POST(request: Request) {
     if (sessionId && !activeSessions.has(sessionId)) {
       activeSessions.add(sessionId);
       totalViews += 1;
+    } else if (!sessionId) {
+      totalViews += 1;
     }
 
-    const onlineCount = Math.floor(Math.random() * 4) + 3;
+    const onlineCount = Math.floor(Math.random() * 3) + 2;
 
     return NextResponse.json({
       views: totalViews,
       online: onlineCount,
     });
   } catch (error) {
-    return NextResponse.json({ views: totalViews, online: 4 });
+    return NextResponse.json({ views: totalViews, online: 2 });
   }
 }

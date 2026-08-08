@@ -7,11 +7,11 @@ import { motion, useSpring, useTransform } from "framer-motion";
 export function VisitorCounterWidget() {
   const [mounted, setMounted] = useState(false);
   const [localTime, setLocalTime] = useState("");
-  const [views, setViews] = useState(12048);
-  const [onlineCount, setOnlineCount] = useState(4);
+  const [views, setViews] = useState(101);
+  const [onlineCount, setOnlineCount] = useState(3);
 
   // Framer Motion spring counter for smooth CountUp animation
-  const springValue = useSpring(12000, {
+  const springValue = useSpring(101, {
     stiffness: 60,
     damping: 15,
   });
@@ -20,7 +20,7 @@ export function VisitorCounterWidget() {
     Math.round(current).toLocaleString("en-US")
   );
 
-  const [formattedNumber, setFormattedNumber] = useState("12,048");
+  const [formattedNumber, setFormattedNumber] = useState("101");
 
   useEffect(() => {
     const unsubscribe = displayCount.on("change", (latest) => {
@@ -48,7 +48,7 @@ export function VisitorCounterWidget() {
     updateTime();
     const interval = setInterval(updateTime, 1000);
 
-    // 2. Unique Session View Tracking (Prevents refresh spam)
+    // 2. Real-Time Session & Visitor Tracking (Starts from 101)
     const initVisitorSession = async () => {
       try {
         let sessionId = sessionStorage.getItem("synk_session_id");
@@ -71,14 +71,15 @@ export function VisitorCounterWidget() {
 
         if (res.ok) {
           const data = await res.json();
-          setViews(data.views || 12048);
-          setOnlineCount(data.online || 4);
-          springValue.set(data.views || 12048);
+          const liveViews = typeof data.views === "number" ? data.views : 101;
+          setViews(liveViews);
+          setOnlineCount(data.online || 3);
+          springValue.set(liveViews);
         } else {
-          springValue.set(12048);
+          springValue.set(101);
         }
       } catch (e) {
-        springValue.set(12048);
+        springValue.set(101);
       }
     };
 
