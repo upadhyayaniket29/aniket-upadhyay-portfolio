@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Download } from "lucide-react";
 import { useModal } from "../ModalProvider";
 
 interface ModalWindowProps {
@@ -127,8 +127,21 @@ export function ModalWindow({ id, title, size = "lg", children }: ModalWindowPro
                   {title}
                 </span>
 
-                {/* Spacer */}
-                <div className="w-6 sm:w-12" />
+                {/* Top Action / Download PDF for Resume */}
+                {id === "resume" ? (
+                  <a
+                    href="/resume.pdf"
+                    download="Aniket_Upadhyay_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#eb6e00] hover:bg-[#ff8a1c] text-white text-[10px] font-mono font-bold transition-all cursor-pointer shadow-[0_0_10px_rgba(235,110,0,0.3)] active:scale-95"
+                  >
+                    <Download className="w-3 h-3 text-white" />
+                    <span>Download PDF</span>
+                  </a>
+                ) : (
+                  <div className="w-6 sm:w-12" />
+                )}
               </div>
 
               {/* Content Workspace */}

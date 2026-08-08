@@ -124,7 +124,7 @@ function DockItem({ id, label, icon, mouseX }: DockItemProps) {
       onFocus={() => setShowTooltip(true)}
       onBlur={() => setShowTooltip(false)}
       whileTap={{ scale: 0.95, transition: { type: "spring", stiffness: 400, damping: 25 } }}
-      className="relative flex items-center justify-center rounded-full cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-[#eb6e00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] select-none pointer-events-auto"
+      className="relative flex-shrink-0 flex items-center justify-center rounded-full cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-[#eb6e00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] select-none pointer-events-auto"
       style={{ cursor: "pointer" }}
     >
       {/* Main icon boundary containing spring translations */}
@@ -239,7 +239,8 @@ export function Dock() {
           damping: 22,
           delay: 0.4,
         }}
-        className="relative flex items-end gap-1 sm:gap-3 px-2 sm:px-4 py-2 sm:py-3 rounded-[20px] sm:rounded-[24px] pointer-events-auto max-w-full overflow-visible shadow-[0_4px_12px_rgba(0,0,0,0.1),0_24px_48px_rgba(0,0,0,0.2),0_2px_4px_rgba(0,0,0,0.4)]"
+        className="relative flex items-end gap-1 sm:gap-3 px-2 sm:px-4 py-1.5 sm:py-3 rounded-[20px] sm:rounded-[24px] pointer-events-auto max-w-[calc(100vw-16px)] sm:max-w-full overflow-x-auto sm:overflow-visible shadow-[0_4px_12px_rgba(0,0,0,0.1),0_24px_48px_rgba(0,0,0,0.2),0_2px_4px_rgba(0,0,0,0.4)]"
+        style={{ scrollbarWidth: "none" }}
       >
         {/* Layer 1: Subtle Backdrop Blur */}
         <div className="absolute inset-0 rounded-[24px] backdrop-blur-[18px] -z-10" />

@@ -14,17 +14,17 @@ export default function ResumeModalContent() {
 
   return (
     <div className="w-full max-w-[900px] mx-auto pb-16">
-      {/* Sticky Top Action Bar */}
-      <div className="sticky top-[-32px] z-20 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-white/5 py-4 mb-8 -mx-8 px-8 -mt-8 flex items-center justify-between shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
-        <div className="flex items-center gap-2 text-zinc-400">
+      {/* Top Action Bar */}
+      <div className="w-full bg-[#141416] border border-white/10 rounded-xl p-3.5 sm:p-4 mb-6 sm:mb-8 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+        <div className="flex items-center gap-2.5 text-zinc-300">
           <FileText className="w-4 h-4 text-[#eb6e00]" />
-          <span className="text-xs font-mono">aniket_upadhyay_resume.pdf</span>
+          <span className="text-xs font-mono font-semibold">Aniket_Upadhyay_Resume.pdf</span>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={handleCopyLink}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 border border-white/5 text-[10px] font-mono text-zinc-400 hover:text-white transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/10 border border-white/10 text-xs font-mono text-zinc-300 hover:text-white transition-colors cursor-pointer"
           >
             {copied ? (
               <>
@@ -33,7 +33,7 @@ export default function ResumeModalContent() {
               </>
             ) : (
               <>
-                <Copy className="w-3.5 h-3.5" />
+                <Copy className="w-3.5 h-3.5 text-zinc-400" />
                 <span>Copy Link</span>
               </>
             )}
@@ -41,9 +41,11 @@ export default function ResumeModalContent() {
           <a
             href="/resume.pdf"
             download="Aniket_Upadhyay_Resume.pdf"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#eb6e00] hover:bg-[#ff8a1c] text-white text-[10px] font-mono font-semibold transition-colors cursor-pointer shadow-[0_0_15px_rgba(235,110,0,0.3)] hover:shadow-[0_0_20px_rgba(235,110,0,0.5)]"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#eb6e00] hover:bg-[#ff8a1c] text-white text-xs font-mono font-bold transition-all cursor-pointer shadow-[0_0_15px_rgba(235,110,0,0.4)] hover:shadow-[0_0_20px_rgba(235,110,0,0.6)] active:scale-95"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-4 h-4 text-white" />
             <span>Download PDF</span>
           </a>
         </div>
