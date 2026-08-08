@@ -1,0 +1,24 @@
+# Advanced Edge Caching: Optimizing Next.js for Global Scale
+
+Reducing TTFB (Time to First Byte) is critical when building SaaS platforms. While standard Content Delivery Networks (CDNs) cache static images, dynamic pages often bypass cache systems, leading to database latency spikes.
+
+## The Strategy: Stale-While-Revalidate
+
+Next.js leverages Stale-While-Revalidate (SWR) headers directly at Vercel's Edge Server level:
+
+```typescript
+export async function GET() {
+  return Response.json(data, {
+    headers: {
+      "Cache-Control": "public, s-maxage=60, stale-while-revalidate=30",
+    },
+  });
+}
+```
+
+This ensures that:
+1. The first visitor gets the cached version instantly.
+2. Next.js triggers a revalidation request in the background.
+3. Subsequent visitors receive the updated cache.
+
+Applying these headers correctly in our API routes reduces average response times to under 15ms globally.

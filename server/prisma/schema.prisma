@@ -1,0 +1,308 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // Hashed password
+  name      String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id              String              @id @default(uuid())
+  title           String
+  slug            String              @unique
+  description     String
+  problem         String
+  solution        String
+  architecture    String
+  github          String?
+  demo            String?
+  featuredImage   String              // Primary landscape cover
+  mobileImage     String?             // Phone frame layout
+  desktopImage    String?             // Notebook mockup layout
+  status          String              @default("COMPLETED") // "COMPLETED", "IN_PROGRESS", "MAINTENANCE", "ARCHIVED"
+  featured        Boolean             @default(false)
+  
+  // Performance & Impact Metrics
+  githubStars     Int?                @default(0)
+  downloads       Int?                @default(0)
+  usersCount      Int?                @default(0)
+  lighthouseScore Int?                @default(100)
+
+  orderIndex      Int                 @default(0)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  
+  images          ProjectImage[]
+  technologies    ProjectTechnology[]
+  tags            ProjectTag[]
+}
+
+model ProjectImage {
+  id         String   @id @default(uuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url        String
+  alt        String?
+  orderIndex Int      @default(0)
+}
+
+model Technology {
+  id         String              @id @default(uuid())
+  name       String              @unique
+  icon       String?             // Lucide/React Icon ID
+  color      String?             // Styling hex code (e.g. "#EB6E00")
+  projects   ProjectTechnology[]
+}
+
+model ProjectTechnology {
+  projectId    String
+  technologyId String
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, technologyId])
+}
+
+model Tag {
+  id       String       @id @default(uuid())
+  name     String       @unique // e.g. "Full Stack", "AI"
+  projects ProjectTag[]
+}
+
+model ProjectTag {
+  projectId String
+  tagId     String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, tagId])
+}
+
+model Blog {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  coverImage  String?
+  tags        String   // Comma-separated search tags
+  published   Boolean  @default(false)
+  featured    Boolean  @default(false)
+  readingTime Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id         String   @id @default(uuid())
+  name       String
+  category   String   // "Frontend", "Backend", "DevOps", "Tools"
+  icon       String?  // Lucide key
+  level      String   @default("ADVANCED") // "BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT"
+  featured   Boolean  @default(false)
+  orderIndex Int      @default(0)
+}
+
+model SocialLink {
+  id       String  @id @default(uuid())
+  platform String  @unique // "GitHub", "LinkedIn", "Twitter", etc.
+  url      String
+  icon     String?
+  active   Boolean @default(true)
+}
+
+model Resume {
+  id        String   @id @default(uuid())
+  version   String   @unique // e.g. "v1", "v2"
+  pdfUrl    String
+  active    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Media {
+  id        String   @id @default(uuid())
+  url       String
+  alt       String?
+  type      String   // "image", "video", "pdf"
+  category  String   // "projects", "books", "resume"
+  createdAt DateTime @default(now())
+}
+
+model SEO {
+  id             String  @id @default(uuid())
+  page           String  @unique // e.g. "/", "/projects", "/blog"
+  title          String
+  description    String
+  keywords       String  // Comma-separated
+  image          String?
+  ogTitle        String?
+  ogDescription  String?
+  ogImage        String?
+  twitterCard    String? // e.g. "summary_large_image"
+  structuredData String? // JSON metadata schema
+}
+
+model Book {
+  id              String     @id @default(uuid())
+  title           String
+  author          String
+  coverUrl        String
+  rating          Float
+  biggestTakeaway String
+  myThoughts      String
+  notes           String
+  lessons         String
+  status          String     // "READING", "COMPLETED", "TO_READ"
+  category        String     @default("Programming")
+  pagesTotal      Int        @default(300)
+  pagesRead       Int        @default(0)
+  chapters        Chapter[]
+  quotes          Quote[]
+  bookmarks       Bookmark[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model Chapter {
+  id          String   @id @default(uuid())
+  title       String
+  summary     String
+  learnings   String
+  quote       String
+  notes       String
+  application String
+  orderIndex  Int      @default(0)
+  bookId      String
+  book        Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+}
+
+model Bookmark {
+  id           String   @id @default(uuid())
+  chapterTitle String
+  highlightText String
+  note         String
+  pageNumber   Int
+  bookId       String
+  book         Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+}
+
+model Inspiration {
+  id         String @id @default(uuid())
+  name       String
+  imageUrl   String
+  quote      String
+  lessons    String
+  orderIndex Int    @default(0)
+}
+
+model Quote {
+  id     String  @id @default(uuid())
+  text   String
+  author String
+  active Boolean @default(true)
+  bookId String?
+  book   Book?   @relation(fields: [bookId], references: [id], onDelete: SetNull)
+}
+
+model Experience {
+  id          String    @id @default(uuid())
+  role        String
+  company     String
+  location    String
+  startDate   DateTime
+  endDate     DateTime? // Null if isCurrent = true
+  isCurrent   Boolean   @default(false)
+  description String
+  logoUrl     String?
+  orderIndex  Int       @default(0)
+}
+
+model Uses {
+  id            String  @id @default(uuid())
+  name          String
+  category      String  // "Hardware", "Software", "Desk Setup"
+  description   String
+  affiliateLink String?
+  website       String?
+  github        String?
+  orderIndex    Int     @default(0)
+}
+
+model Now {
+  id        String   @id @default(uuid())
+  reading   String
+  learning  String
+  building  String
+  listening String
+  goal      String
+  updatedAt DateTime @updatedAt
+}
+
+model KnowledgeBase {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  category  String   // "Projects", "Biography", "WorkStyle"
+  priority  Int      @default(1)
+  keywords  String?  // Comma-separated keywords
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  message   String
+  isRead    Boolean  @default(false)
+  replied   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Visitor {
+  id        String   @id @default(uuid())
+  ipHash    String   @unique
+  count     Int      @default(1)
+  lastVisit DateTime @default(now())
+}
+
+model SpotifyToken {
+  id           String   @id @default("spotify")
+  accessToken  String
+  refreshToken String
+  expiresAt    DateTime
+  updatedAt    DateTime @updatedAt
+}
+
+model GitHubStats {
+  id           String   @id @default("github")
+  username     String
+  followers    Int
+  following    Int
+  publicRepos  Int
+  totalStars   Int
+  totalForks   Int
+  streak       Int
+  updatedAt    DateTime @updatedAt
+}
+
+model LeetCodeStats {
+  id             String   @id @default("leetcode")
+  ranking        Int
+  solvedTotal    Int
+  solvedEasy     Int
+  solvedMedium   Int
+  solvedHard     Int
+  streak         Int
+  lastSolvedName String
+  updatedAt      DateTime @updatedAt
+}
+
