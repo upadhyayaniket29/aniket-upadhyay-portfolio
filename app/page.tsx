@@ -13,8 +13,8 @@ const CinematicCanvasEnv = dynamic(() => import("../components/three/CinematicCa
 import LibraryOverlay from "../components/books/LibraryOverlay";
 const GlassScrollbar = dynamic(() => import("../components/ui/GlassScrollbar"), { ssr: false });
 import CinematicPreloader from "../components/ui/CinematicPreloader";
-const GitHubActivityCard = dynamic(() => import("../components/github/GitHubActivityCard"), { ssr: false });
-const LeetCodeActivityCard = dynamic(() => import("../components/leetcode/LeetCodeActivityCard"), { ssr: false });
+import GitHubActivityCard from "../components/github/GitHubActivityCard";
+import LeetCodeActivityCard from "../components/leetcode/LeetCodeActivityCard";
 const VisitorCounterWidget = dynamic(() => import("../components/ui/VisitorCounterWidget"), { ssr: false });
 
 // Modals
@@ -166,14 +166,14 @@ export default function Home() {
 
       </section>
 
-      {/* GitHub & LeetCode Activity Section */}
-      <GitHubActivityCard />
-      <LeetCodeActivityCard />
+      {/* Developer Activity Section (GitHub & LeetCode) */}
+      <div className="relative z-20 space-y-8 my-8">
+        <GitHubActivityCard />
+        <LeetCodeActivityCard />
+      </div>
 
       {/* About Section */}
-      <section className="relative z-20 w-full bg-[#090909] px-6 md:px-12 lg:px-32 pt-28 pb-16">
-        {/* Silky Smooth Apple-Style Fade Transition from Hero to About */}
-        <div className="absolute top-[-320px] left-0 w-full h-[320px] bg-gradient-to-b from-transparent via-[#090909]/70 to-[#090909] pointer-events-none -z-10"></div>
+      <section className="relative z-20 w-full bg-[#090909] px-6 md:px-12 lg:px-32 pt-16 pb-16">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
         
         <motion.div 
