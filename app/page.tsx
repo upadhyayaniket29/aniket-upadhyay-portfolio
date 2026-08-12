@@ -49,15 +49,15 @@ export default function Home() {
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />
       
-      {/* 100% High-Visibility Full-Bleed Artwork Background (Matching saloon.wtf) */}
-      <div className="fixed top-0 left-0 w-full h-screen z-0 overflow-hidden bg-[#080605]">
-        {/* 100% Opacity Full-Brightness High-Res Artwork */}
-        <div className="absolute inset-0 z-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-100"></div>
-        <CinematicCanvasEnv />
-        
+      {/* Pure Raw Full-Bleed Artwork Image Background (100% Visibility AS IS) */}
+      <div className="fixed top-0 left-0 w-full h-screen z-0 overflow-hidden">
+        <img 
+          src="/hero-bg.jpg" 
+          alt="Developer Workspace Artwork" 
+          className="w-full h-full object-cover object-center"
+        />
         {/* Subtle Bottom Fade for smooth transition into About section */}
-        <div className="absolute bottom-0 left-0 w-full h-32 pointer-events-none z-10 bg-gradient-to-t from-[#090909] to-transparent"></div>
-        <div className="absolute inset-0 pointer-events-none z-20 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay"></div>
+        <div className="absolute bottom-0 left-0 w-full h-24 pointer-events-none z-10 bg-gradient-to-t from-[#090909] to-transparent"></div>
       </div>
 
       {/* Main Hero Content */}
