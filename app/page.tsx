@@ -49,27 +49,26 @@ export default function Home() {
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />
       
-      {/* Pure Raw Full-Bleed Background Image (100% Visibility AS IS, Zero Text Overlays) */}
-      <div className="relative w-full h-screen overflow-hidden bg-[#080605] flex items-center justify-center">
+      {/* Landing First Screen - 100% Full-Bleed Artwork Image with ONLY Navbar */}
+      <section className="relative w-full h-screen overflow-hidden bg-[#080605] flex items-center justify-center">
         <img 
-          src="/hero-bg.jpg" 
+          src="/hero-bg.jpg?v=3" 
           alt="Developer Workspace Artwork" 
           className="w-full h-full object-cover object-center"
         />
 
-        {/* Floating Top Widgets */}
-        <div className="absolute top-0 left-0 w-full p-4 sm:p-6 md:p-12 z-20 flex flex-col pointer-events-none">
-          <header className="w-full flex items-center justify-between pointer-events-none">
-            <div className="flex items-center gap-2.5 pt-2 sm:pt-0 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 shadow-lg pointer-events-auto">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5500] shadow-[0_0_12px_#ff5500] animate-pulse"></span>
-              <span className="text-[9px] sm:text-[10px] tracking-widest font-mono text-amber-100 uppercase font-bold">Open to SDE Opportunities</span>
-            </div>
-          </header>
+        {/* Top Left Status Badge */}
+        <div className="absolute top-4 sm:top-6 left-4 sm:left-8 z-20 pointer-events-auto">
+          <div className="flex items-center gap-2.5 bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 shadow-xl">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5500] shadow-[0_0_12px_#ff5500] animate-pulse"></span>
+            <span className="text-[9px] sm:text-[10px] tracking-widest font-mono text-amber-100 uppercase font-bold">Open to SDE Opportunities</span>
+          </div>
+        </div>
 
+        {/* Top Right Visitor Counter & Clock Widget */}
+        <div className="absolute top-4 sm:top-6 right-4 sm:right-8 z-20 pointer-events-auto">
           <VisitorCounterWidget />
         </div>
-      </div>
-
       </section>
 
       {/* Developer Activity Section (GitHub & LeetCode) */}
