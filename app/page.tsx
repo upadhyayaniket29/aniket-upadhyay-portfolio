@@ -14,6 +14,7 @@ import LibraryOverlay from "../components/books/LibraryOverlay";
 const GlassScrollbar = dynamic(() => import("../components/ui/GlassScrollbar"), { ssr: false });
 import CinematicPreloader from "../components/ui/CinematicPreloader";
 const GitHubActivityCard = dynamic(() => import("../components/github/GitHubActivityCard"), { ssr: false });
+const LeetCodeActivityCard = dynamic(() => import("../components/leetcode/LeetCodeActivityCard"), { ssr: false });
 const VisitorCounterWidget = dynamic(() => import("../components/ui/VisitorCounterWidget"), { ssr: false });
 
 // Modals
@@ -165,8 +166,9 @@ export default function Home() {
 
       </section>
 
-      {/* GitHub Activity & Latest Stats Section */}
+      {/* GitHub & LeetCode Activity Section */}
       <GitHubActivityCard />
+      <LeetCodeActivityCard />
 
       {/* About Section */}
       <section className="relative z-20 w-full bg-[#090909] px-6 md:px-12 lg:px-32 pt-28 pb-16">
