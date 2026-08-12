@@ -63,9 +63,10 @@ export async function GET() {
     if (contribData && Array.isArray(contribData.contributions)) {
       contributions = contribData.contributions;
       if (contribData.total && typeof contribData.total === "object") {
-        totalContributions = Object.values(contribData.total).reduce((a: any, b: any) => Number(a) + Number(b), 0);
+        const vals = Object.values(contribData.total) as (number | string)[];
+        totalContributions = vals.reduce<number>((sum, val) => sum + Number(val || 0), 0);
       } else {
-        totalContributions = contributions.reduce((acc: number, d: any) => acc + (d.count || 0), 0);
+        totalContributions = contributions.reduce((acc: number, d: any) => acc + Number(d.count || 0), 0);
       }
     }
 
