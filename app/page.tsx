@@ -49,18 +49,15 @@ export default function Home() {
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />
       
-      {/* Cinematic Full-Bleed Background Image & 3D WebGL Layer */}
+      {/* 100% High-Visibility Full-Bleed Artwork Background (Matching saloon.wtf) */}
       <div className="fixed top-0 left-0 w-full h-screen z-0 overflow-hidden bg-[#080605]">
-        {/* Full-bleed high-res artwork spanning entire viewport width */}
-        <div className="absolute inset-0 z-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-70 sm:opacity-80 scale-[1.01] transition-transform duration-1000"></div>
+        {/* 100% Opacity Full-Brightness High-Res Artwork */}
+        <div className="absolute inset-0 z-0 bg-[url('/hero-bg.jpg')] bg-cover bg-center opacity-100"></div>
         <CinematicCanvasEnv />
         
-        {/* Atmospheric Lighting Gradient Vignettes */}
-        <div className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-r from-[#080605]/85 via-[#080605]/45 to-[#080605]/50"></div>
-        <div className="absolute inset-0 pointer-events-none z-10 bg-gradient-to-b from-[#080605]/40 via-transparent to-[#080605]"></div>
-        
-        {/* Atmospheric Film Grain */}
-        <div className="absolute inset-0 pointer-events-none z-20 bg-[url('/noise.png')] opacity-[0.05] mix-blend-overlay"></div>
+        {/* Subtle Bottom Fade for smooth transition into About section */}
+        <div className="absolute bottom-0 left-0 w-full h-32 pointer-events-none z-10 bg-gradient-to-t from-[#090909] to-transparent"></div>
+        <div className="absolute inset-0 pointer-events-none z-20 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay"></div>
       </div>
 
       {/* Main Hero Content */}
@@ -69,8 +66,8 @@ export default function Home() {
         {/* Top Header */}
         <header className="w-full flex items-center justify-between mb-auto pointer-events-none">
           <div className="flex items-center gap-2.5 pt-2 sm:pt-0">
-            <span className="w-2 h-2 rounded-full bg-[#ff5500] shadow-[0_0_10px_#ff5500] animate-pulse"></span>
-            <span className="text-[9px] sm:text-[10px] tracking-widest font-mono text-amber-200 uppercase font-bold">Open to SDE Opportunities</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5500] shadow-[0_0_12px_#ff5500] animate-pulse"></span>
+            <span className="text-[9px] sm:text-[10px] tracking-widest font-mono text-amber-100 uppercase font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">Open to SDE Opportunities</span>
           </div>
         </header>
 
@@ -79,40 +76,40 @@ export default function Home() {
 
         {/* Hero Left Content */}
         <div className="w-full h-full flex flex-col justify-center flex-1 mt-12 sm:mt-20 md:mt-12 pointer-events-none">
-          <div className="max-w-[440px] flex flex-col space-y-6 sm:space-y-8">
+          <div className="max-w-[460px] flex flex-col space-y-6 sm:space-y-8 bg-black/40 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.7)] pointer-events-auto">
             
             {/* Hi I'm & Motto Badge */}
             <div className="flex flex-col space-y-2">
               <div className="flex items-center gap-4">
-                <span className="text-[12px] text-zinc-300 font-medium tracking-wide">Hi, I'm</span>
-                <div className="h-px bg-amber-500/40 w-12"></div>
+                <span className="text-[13px] text-zinc-200 font-semibold tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">Hi, I'm</span>
+                <div className="h-px bg-amber-500/50 w-12"></div>
               </div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff5500]/15 border border-[#ff5500]/30 backdrop-blur-md w-fit">
-                <span className="text-[9px] font-mono tracking-widest text-amber-300 uppercase font-bold">WORK IN SILENCE • LET COMEBACK BE THE NOISE</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ff5500]/25 border border-[#ff5500]/50 backdrop-blur-md w-fit shadow-[0_0_15px_rgba(255,85,0,0.3)]">
+                <span className="text-[10px] font-mono tracking-widest text-amber-200 uppercase font-extrabold">WORK IN SILENCE • LET COMEBACK BE THE NOISE</span>
               </div>
             </div>
 
             {/* Name */}
             <div className="flex flex-col leading-[1.02]">
-              <h1 className="fluid-h1 font-extrabold tracking-tight text-white font-display uppercase drop-shadow-[0_0_25px_rgba(255,85,0,0.2)]">
+              <h1 className="fluid-h1 font-black tracking-tight text-white font-display uppercase drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)]">
                 Aniket
               </h1>
-              <h1 className="fluid-h1 font-extrabold tracking-tight text-[#ff7700] font-display uppercase drop-shadow-[0_0_35px_rgba(255,119,0,0.45)]">
+              <h1 className="fluid-h1 font-black tracking-tight text-[#ff7700] font-display uppercase drop-shadow-[0_4px_25px_rgba(255,119,0,0.6)]">
                 Upadhyay
               </h1>
             </div>
 
             {/* Title & Description */}
-            <div className="space-y-4 sm:space-y-6 pt-1 sm:pt-2">
-              <span className="text-[10px] font-mono tracking-[0.25em] text-[#ff7700] font-bold uppercase drop-shadow-[0_0_10px_rgba(255,119,0,0.5)]">
+            <div className="space-y-4 sm:space-y-6">
+              <span className="text-[11px] font-mono tracking-[0.25em] text-[#ff8800] font-black uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] block">
                 SOFTWARE ENGINEER
               </span>
               
               <div className="relative pl-4 border-l-2 border-[#ff5500]">
-                <p className="fluid-body text-zinc-300 font-sans leading-[1.8] max-w-[380px]">
+                <p className="fluid-body text-zinc-200 font-sans leading-[1.8] max-w-[380px] drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                   Building production-grade applications with modern technologies and exceptional user experiences.
                 </p>
-                <div className="mt-3 pt-2 border-t border-white/10 text-[10px] font-mono text-amber-400/90 font-bold uppercase tracking-wider">
+                <div className="mt-3 pt-2.5 border-t border-white/15 text-[10px] font-mono text-amber-300 font-extrabold uppercase tracking-wider drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
                   Discipline beats talent — every time.
                 </div>
               </div>
