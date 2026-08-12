@@ -49,12 +49,12 @@ export default function Home() {
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />
       
-      {/* Landing First Screen - 100% Full-Bleed Artwork Image with ONLY Navbar */}
+      {/* Landing First Screen - 100% Full-Bleed Artwork Image with object-top alignment */}
       <section className="relative w-full h-screen overflow-hidden bg-[#080605] flex items-center justify-center">
         <img 
-          src="/hero-bg.jpg?v=3" 
+          src="/hero-bg.jpg?v=4" 
           alt="Developer Workspace Artwork" 
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-top"
         />
 
         {/* Top Left Status Badge */}
