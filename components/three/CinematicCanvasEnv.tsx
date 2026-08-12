@@ -15,17 +15,16 @@ function Character25D() {
   texture.colorSpace = THREE.SRGBColorSpace;
   
   const geometry = useMemo(() => {
-    // Highly subdivided plane for future lens distortion (128x128 segments)
-    const width = 15;
-    const height = 10;
+    // Subdivided plane expanding across the full screen viewport
+    const width = 22;
+    const height = 13.5;
     const geo = new THREE.PlaneGeometry(width, height, 128, 128);
     
-    // Restore the exact original faux depth curve to maintain identical visual composition
     const pos = geo.attributes.position;
     for (let i = 0; i < pos.count; i++) {
       const px = pos.getX(i);
       const py = pos.getY(i);
-      const pz = -(px * px + py * py) * 0.003;
+      const pz = -(px * px + py * py) * 0.0015;
       pos.setZ(i, pz);
     }
     
@@ -37,28 +36,20 @@ function Character25D() {
     if (!groupRef.current) return;
     
     const t = state.clock.getElapsedTime();
-    
     const breathe = Math.sin(t * 1.5) * 0.002;
-    const swayX = Math.sin(t * 0.4) * 0.001;
-    const swayZ = Math.cos(t * 0.2) * 0.0005;
     
-    const targetRotX = (state.pointer.y * Math.PI) / 100;
-    const targetRotY = (state.pointer.x * Math.PI) / 100;
-    
-    // Slight ambient breathing in scale
     groupRef.current.scale.set(1 + breathe, 1 + breathe, 1);
   });
 
   return (
-    // Restored exact original positioning and scale to preserve the approved composition
-    <group ref={groupRef} position={[1.8, 0, 0]}>
+    <group ref={groupRef} position={[0, 0, 0]}>
       <mesh geometry={geometry} castShadow receiveShadow>
         <meshPhysicalMaterial 
           map={texture} 
-          roughness={0.5} 
-          metalness={0.1}
-          emissive={new THREE.Color("#090909")} 
-          emissiveIntensity={0.2} 
+          roughness={0.4} 
+          metalness={0.05}
+          emissive={new THREE.Color("#080605")} 
+          emissiveIntensity={0.15} 
           side={THREE.DoubleSide}
           transparent={true}
         />
@@ -191,13 +182,7 @@ function SceneControls() {
 
 export default function CinematicCanvasEnv() {
   return (
-    <div 
-      className="absolute inset-0 w-full h-full pointer-events-none z-0 bg-transparent"
-      style={{
-        maskImage: "linear-gradient(to right, transparent 0%, black 30%, black 100%)",
-        WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 30%, black 100%)"
-      }}
-    >
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 bg-[#080605]">
       <Canvas 
         shadows 
         dpr={[1, 1.5]} 
