@@ -6,11 +6,10 @@ import { useModal } from "../ModalProvider";
 export default function TopBarHeaderV2() {
   const { activeModal } = useModal();
   const [mounted, setMounted] = useState(false);
-  const [formattedTime, setFormattedTime] = useState("00:22");
+  const [formattedTime, setFormattedTime] = useState("00:54");
   const [formattedDate, setFormattedDate] = useState("Fri, Aug 14");
-  const [views, setViews] = useState(10744);
+  const [views, setViews] = useState(10845);
 
-  // Map activeModal to display label
   const getActiveLabel = () => {
     if (!activeModal || activeModal === "home") return "Home";
     switch (activeModal.toLowerCase()) {
@@ -41,18 +40,13 @@ export default function TopBarHeaderV2() {
   useEffect(() => {
     setMounted(true);
 
-    // Live Date & Time Updater
     const updateDateTime = () => {
       const now = new Date();
-
-      // Format Date: Fri, Aug 14
       const dateStr = now.toLocaleDateString("en-US", {
         weekday: "short",
         month: "short",
         day: "numeric",
       });
-
-      // Format 24h Time: 00:22
       const timeStr = now.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
@@ -66,7 +60,6 @@ export default function TopBarHeaderV2() {
     updateDateTime();
     const interval = setInterval(updateDateTime, 1000);
 
-    // Fetch Visitor Count
     const fetchViews = async () => {
       try {
         let sessionId = sessionStorage.getItem("synk_session_id");
@@ -88,7 +81,7 @@ export default function TopBarHeaderV2() {
         if (res.ok) {
           const data = await res.json();
           if (typeof data.views === "number") {
-            setViews(data.views > 1000 ? data.views : 10744 + data.views);
+            setViews(data.views > 1000 ? data.views : 10845 + data.views);
           }
         }
       } catch {}
@@ -103,70 +96,34 @@ export default function TopBarHeaderV2() {
   const formattedViews = views.toLocaleString("en-US");
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        height: "34px",
-        zIndex: 99999,
-        background: "rgba(9, 11, 16, 0.75)",
-        backdropFilter: "blur(24px)",
-        WebkitBackdropFilter: "blur(24px)",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
-        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.4)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 22px",
-        fontFamily: "monospace",
-        fontSize: "11.5px",
-        color: "rgba(255, 255, 255, 0.75)",
-        userSelect: "none",
-        pointerEvents: "auto",
-      }}
-    >
+    <header className="fixed top-0 left-0 right-0 h-[34px] z-[99999] bg-[#090b10]/75 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.4)] flex items-center justify-between px-3.5 sm:px-6 font-mono text-[11px] sm:text-[11.5px] text-white/75 select-none pointer-events-auto">
       {/* Left side: AU  |  <Active Page> */}
-      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <span
-          style={{
-            fontWeight: 800,
-            color: "#f97316",
-            letterSpacing: "0.1em",
-            textShadow: "0 0 8px rgba(249, 115, 22, 0.4)",
-          }}
-        >
+      <div className="flex items-center gap-1.5 sm:gap-2">
+        <span className="font-extrabold text-[#f97316] tracking-wider drop-shadow-[0_0_8px_rgba(249,115,22,0.4)]">
           AU
         </span>
-        <span style={{ color: "rgba(255, 255, 255, 0.15)" }}>|</span>
-        <span style={{ color: "rgba(255, 255, 255, 0.8)", fontWeight: 500, letterSpacing: "0.04em" }}>
+        <span className="text-white/20">|</span>
+        <span className="text-white/80 font-medium tracking-wide max-w-[100px] sm:max-w-none truncate">
           {activeLabel}
         </span>
       </div>
 
-      {/* Right side: ↑ 10,744    Fri, Aug 14    00:22 */}
-      <div style={{ display: "flex", alignItems: "center", gap: "22px" }}>
+      {/* Right side: ↑ 10,845    Fri, Aug 14    00:54 */}
+      <div className="flex items-center gap-3 sm:gap-5">
         {/* Visitors count */}
-        <div style={{ display: "flex", alignItems: "center", gap: "5px", color: "rgba(255, 255, 255, 0.8)" }}>
-          <span style={{ fontSize: "11px", color: "#f97316", fontWeight: 700 }}>↑</span>
-          <span style={{ fontWeight: 600 }}>{mounted ? formattedViews : "10,744"}</span>
+        <div className="flex items-center gap-1 text-white/80">
+          <span className="text-[10px] text-[#f97316] font-bold">↑</span>
+          <span className="font-semibold">{mounted ? formattedViews : "10,845"}</span>
         </div>
 
-        {/* Date */}
-        <div style={{ color: "rgba(255, 255, 255, 0.4)" }}>
+        {/* Date (hidden on mobile < 640px) */}
+        <div className="hidden sm:block text-white/40">
           {mounted ? formattedDate : "Fri, Aug 14"}
         </div>
 
         {/* Live 24h Time */}
-        <div
-          style={{
-            fontWeight: 700,
-            color: "#fb923c",
-            textShadow: "0 0 10px rgba(249, 115, 22, 0.35)",
-          }}
-        >
-          {mounted ? formattedTime : "00:22"}
+        <div className="font-bold text-[#fb923c] drop-shadow-[0_0_8px_rgba(249,115,22,0.35)]">
+          {mounted ? formattedTime : "00:54"}
         </div>
       </div>
     </header>

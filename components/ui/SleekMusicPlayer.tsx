@@ -202,6 +202,7 @@ export default function SleekMusicPlayer() {
 
       {/* Floating Modern Music Player Widget - Absolute to Landing Hero section only */}
       <div
+        className="hidden md:block"
         style={{
           position: "absolute",
           bottom: "90px",

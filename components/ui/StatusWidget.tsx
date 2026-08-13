@@ -3,6 +3,7 @@
 export default function StatusWidget() {
   return (
     <div
+      className="hidden md:block"
       style={{
         position: "absolute",
         top: "54px",

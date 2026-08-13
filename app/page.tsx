@@ -1,4 +1,4 @@
-// v=compact-about-card-clearance-v6001
+// v=responsive-all-devices-v7001
 "use client";
 
 import React, { useState, useEffect } from "react";
