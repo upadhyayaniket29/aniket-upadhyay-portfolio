@@ -42,7 +42,7 @@ export default function ThoughtWidget() {
         left: "28px",
         zIndex: 50,
         maxWidth: "290px",
-        pointerEvents: "none",
+        pointerEvents: "auto",
       }}
     >
       {/* Glassmorphism Card */}

@@ -58,10 +58,18 @@ export default function Home() {
           alt="Developer Workspace Sunset Artwork" 
           className="w-full h-full object-cover object-center"
         />
-        {/* Animated Thought Widget - Top Left */}
-        <ThoughtWidget />
-        {/* Spotify Now Playing - Left Middle */}
-        <SpotifyWidget />
+        {/* Overlay container - sits above image, holds all floating widgets */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 10,
+          pointerEvents: "none",
+        }}>
+          {/* Animated Thought Widget - Top Left */}
+          <ThoughtWidget />
+          {/* Spotify Now Playing - Left Middle */}
+          <SpotifyWidget />
+        </div>
       </section>
 
       {/* Developer Activity Section (GitHub & LeetCode) */}
