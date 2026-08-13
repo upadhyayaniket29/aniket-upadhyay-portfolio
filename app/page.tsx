@@ -52,7 +52,7 @@ export default function Home() {
       {/* Landing First Screen - 100% Full-Bleed Masterpiece Sunset Artwork (Perfect Orientation) */}
       <section className="relative w-full h-screen overflow-hidden bg-[#090b12] flex items-center justify-center">
         <img 
-          src="/hero-elevate.png?v=1" 
+          src="/hero-sunset-v999.png?v=999" 
           alt="Developer Workspace Sunset Artwork" 
           className="w-full h-full object-cover object-center"
         />
