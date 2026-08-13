@@ -1,4 +1,4 @@
-// v=absolute-hero-music-player-v1002
+// v=solid-scroll-hero-music-player-v1003
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -74,7 +74,7 @@ export default function Home() {
       </section>
 
       {/* Developer Activity Section (GitHub & LeetCode) */}
-      <div className="relative z-20 space-y-8 my-8">
+      <div className="relative z-20 bg-[#090b12] py-8 space-y-8">
         <GitHubActivityCard />
         <LeetCodeActivityCard />
       </div>
