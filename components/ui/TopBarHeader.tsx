@@ -8,7 +8,7 @@ export default function TopBarHeader() {
   const [mounted, setMounted] = useState(false);
   const [formattedTime, setFormattedTime] = useState("00:00");
   const [formattedDate, setFormattedDate] = useState("Fri, Aug 14");
-  const [views, setViews] = useState(10642);
+  const [views, setViews] = useState(10744);
 
   // Map activeModal to display label
   const getActiveLabel = () => {
@@ -88,8 +88,7 @@ export default function TopBarHeader() {
         if (res.ok) {
           const data = await res.json();
           if (typeof data.views === "number") {
-            // Offset view count for rich display style matching design
-            setViews(data.views > 1000 ? data.views : 10642 + data.views);
+            setViews(data.views > 1000 ? data.views : 10744 + data.views);
           }
         }
       } catch {}
@@ -110,18 +109,19 @@ export default function TopBarHeader() {
         top: 0,
         left: 0,
         right: 0,
-        height: "36px",
+        height: "34px",
         zIndex: 9999,
-        background: "rgba(8, 10, 14, 0.85)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
+        background: "rgba(9, 11, 16, 0.65)",
+        backdropFilter: "blur(24px)",
+        WebkitBackdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.4)",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 18px",
-        fontFamily: "'SF Mono', Monaco, Consolas, 'Courier New', monospace",
-        fontSize: "12px",
+        padding: "0 22px",
+        fontFamily: "monospace",
+        fontSize: "11.5px",
         color: "rgba(255, 255, 255, 0.75)",
         userSelect: "none",
         pointerEvents: "auto",
@@ -129,27 +129,44 @@ export default function TopBarHeader() {
     >
       {/* Left side: AU  |  <Active Page> */}
       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <span style={{ fontWeight: 700, color: "#ffffff", letterSpacing: "0.05em" }}>AU</span>
-        <span style={{ color: "rgba(255, 255, 255, 0.2)" }}>|</span>
-        <span style={{ color: "rgba(255, 255, 255, 0.65)" }}>{activeLabel}</span>
+        <span
+          style={{
+            fontWeight: 800,
+            color: "#f97316",
+            letterSpacing: "0.1em",
+            textShadow: "0 0 8px rgba(249, 115, 22, 0.4)",
+          }}
+        >
+          AU
+        </span>
+        <span style={{ color: "rgba(255, 255, 255, 0.15)" }}>|</span>
+        <span style={{ color: "rgba(255, 255, 255, 0.8)", fontWeight: 500, letterSpacing: "0.04em" }}>
+          {activeLabel}
+        </span>
       </div>
 
-      {/* Right side: ↑ 10,642    Fri, Aug 14    00:06 */}
-      <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+      {/* Right side: ↑ 10,744    Fri, Aug 14    00:18 */}
+      <div style={{ display: "flex", alignItems: "center", gap: "22px" }}>
         {/* Visitors count */}
-        <div style={{ display: "flex", alignItems: "center", gap: "5px", color: "rgba(255, 255, 255, 0.65)" }}>
-          <span style={{ fontSize: "11px", color: "rgba(255, 255, 255, 0.45)" }}>↑</span>
-          <span style={{ fontWeight: 600 }}>{mounted ? formattedViews : "10,642"}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "5px", color: "rgba(255, 255, 255, 0.8)" }}>
+          <span style={{ fontSize: "11px", color: "#f97316", fontWeight: 700 }}>↑</span>
+          <span style={{ fontWeight: 600 }}>{mounted ? formattedViews : "10,744"}</span>
         </div>
 
         {/* Date */}
-        <div style={{ color: "rgba(255, 255, 255, 0.65)" }}>
+        <div style={{ color: "rgba(255, 255, 255, 0.4)" }}>
           {mounted ? formattedDate : "Fri, Aug 14"}
         </div>
 
         {/* Live 24h Time */}
-        <div style={{ fontWeight: 600, color: "#ffffff" }}>
-          {mounted ? formattedTime : "00:06"}
+        <div
+          style={{
+            fontWeight: 700,
+            color: "#fb923c",
+            textShadow: "0 0 10px rgba(249, 115, 22, 0.35)",
+          }}
+        >
+          {mounted ? formattedTime : "00:18"}
         </div>
       </div>
     </header>
