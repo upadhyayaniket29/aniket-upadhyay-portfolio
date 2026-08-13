@@ -52,7 +52,7 @@ export default function Home() {
       {/* Landing First Screen - 100% Full-Bleed Futuristic Masterpiece Artwork */}
       <section className="relative w-full h-screen overflow-hidden bg-[#060608] flex items-center justify-center">
         <img 
-          src="/hero-future-v1.jpg" 
+          src="/hero-future-v1.jpg?v=99" 
           alt="Developer Futuristic Workspace Artwork" 
           className="w-full h-full object-cover object-center"
         />
