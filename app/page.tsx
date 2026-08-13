@@ -52,7 +52,7 @@ export default function Home() {
       {/* Landing First Screen - 100% Full-Bleed Ultra-Cool Artwork (Perfect Orientation) */}
       <section className="relative w-full h-screen overflow-hidden bg-[#060404] flex items-center justify-center">
         <img 
-          src="/hero-bg.jpg?v=7" 
+          src="/hero-artwork-v16.jpg" 
           alt="Developer Workspace Artwork" 
           className="w-full h-full object-cover object-center"
         />
