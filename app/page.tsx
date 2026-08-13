@@ -16,6 +16,7 @@ import CinematicPreloader from "../components/ui/CinematicPreloader";
 import GitHubActivityCard from "../components/github/GitHubActivityCard";
 import LeetCodeActivityCard from "../components/leetcode/LeetCodeActivityCard";
 const VisitorCounterWidget = dynamic(() => import("../components/ui/VisitorCounterWidget"), { ssr: false });
+const ThoughtWidget = dynamic(() => import("../components/ui/ThoughtWidget"), { ssr: false });
 
 // Modals
 import ProjectsModalContent from "../components/modals/ProjectsModalContent";
@@ -49,13 +50,15 @@ export default function Home() {
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />
       
-      {/* Landing First Screen - 100% Full-Bleed Masterpiece Sunset Artwork (Perfect Orientation) */}
+      {/* Landing First Screen - 100% Full-Bleed Masterpiece Sunset Artwork */}
       <section className="relative w-full h-screen overflow-hidden bg-[#090b12] flex items-center justify-center">
         <img 
           src="/hero-sunset-v999.png?v=999" 
           alt="Developer Workspace Sunset Artwork" 
           className="w-full h-full object-cover object-center"
         />
+        {/* Animated Thought Widget - Top Left */}
+        <ThoughtWidget />
       </section>
 
       {/* Developer Activity Section (GitHub & LeetCode) */}
