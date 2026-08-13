@@ -196,13 +196,13 @@ export default function MusicWidget() {
         style={{ width: 0, height: 0, border: "none", position: "absolute", visibility: "hidden" }}
       />
 
-      {/* Music Player UI */}
+      {/* Music Player UI - FIXED so always visible regardless of stacking */}
       <div
         style={{
-          position: "absolute",
+          position: "fixed",
           bottom: "90px",
           left: "28px",
-          zIndex: 50,
+          zIndex: 9999,
           pointerEvents: "auto",
           width: expanded ? "280px" : "220px",
           transition: "width 0.35s cubic-bezier(0.16,1,0.3,1)",
