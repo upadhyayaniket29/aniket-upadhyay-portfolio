@@ -20,6 +20,7 @@ const VisitorCounterWidget = dynamic(() => import("../components/ui/VisitorCount
 const ThoughtWidget = dynamic(() => import("../components/ui/ThoughtWidget"), { ssr: false });
 const SleekMusicPlayer = dynamic(() => import("../components/ui/SleekMusicPlayer"), { ssr: false });
 const StatusWidget = dynamic(() => import("../components/ui/StatusWidget"), { ssr: false });
+const TopBarHeader = dynamic(() => import("../components/ui/TopBarHeader"), { ssr: false });
 
 // Modals
 import ProjectsModalContent from "../components/modals/ProjectsModalContent";
@@ -50,6 +51,9 @@ export default function Home() {
   return (
     <div className="relative bg-[#090909] text-white overflow-x-hidden font-sans">
       
+      {/* Top Header Bar (AU | Active Section , Visitor Count, Date, Live Time) */}
+      <TopBarHeader />
+
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />
       
