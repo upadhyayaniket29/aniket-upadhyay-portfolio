@@ -1,4 +1,4 @@
-// v=hero-center-branding-v3001
+// v=hero-about-window-card-v4001
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -22,7 +22,6 @@ const SleekMusicPlayer = dynamic(() => import("../components/ui/SleekMusicPlayer
 const StatusWidget = dynamic(() => import("../components/ui/StatusWidget"), { ssr: false });
 const TopBarHeaderV2 = dynamic(() => import("../components/ui/TopBarHeaderV2"), { ssr: false });
 const AboutWindowCard = dynamic(() => import("../components/ui/AboutWindowCard"), { ssr: false });
-const HeroCenterBranding = dynamic(() => import("../components/ui/HeroCenterBranding"), { ssr: false });
 
 // Modals
 import ProjectsModalContent from "../components/modals/ProjectsModalContent";
@@ -77,8 +76,8 @@ export default function Home() {
           <ThoughtWidget />
           {/* Status Widget (Open To Work, Building, Reading, Writing) - Top Right */}
           <StatusWidget />
-          {/* GenZ Bold Center Branding & Action Buttons */}
-          <HeroCenterBranding />
+          {/* IDE Window About Card - Center Landing Screen */}
+          <AboutWindowCard />
           {/* Sleek Music Player - Bottom Left */}
           <SleekMusicPlayer />
         </div>
@@ -103,12 +102,9 @@ export default function Home() {
         >
           {/* Section Sub-header */}
           <div className="flex items-center gap-4 w-full max-w-[860px]">
-            <span className="text-[10px] tracking-widest font-mono text-[#eb6e00] uppercase">01 / Introduction</span>
+            <span className="text-[10px] tracking-widest font-mono text-[#eb6e00] uppercase">01 / Tech Stack</span>
             <div className="h-px bg-white/10 flex-1"></div>
           </div>
-
-          {/* IDE Window About Card */}
-          <AboutWindowCard />
 
           {/* Tech Stack Pills */}
           <div className="w-full max-w-[860px] pt-6 border-t border-white/5 flex flex-col space-y-6">
