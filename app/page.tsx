@@ -49,11 +49,11 @@ export default function Home() {
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />
       
-      {/* Landing First Screen - 100% Full-Bleed Ultra-Cool Anime Artwork (Perfect Orientation) */}
-      <section className="relative w-full h-screen overflow-hidden bg-[#0a0f18] flex items-center justify-center">
+      {/* Landing First Screen - 100% Full-Bleed Futuristic Masterpiece Artwork */}
+      <section className="relative w-full h-screen overflow-hidden bg-[#060608] flex items-center justify-center">
         <img 
-          src="/hero-anime.jpg?v=1" 
-          alt="Developer Workspace Anime Artwork" 
+          src="/hero-future-v1.jpg" 
+          alt="Developer Futuristic Workspace Artwork" 
           className="w-full h-full object-cover object-center"
         />
       </section>
