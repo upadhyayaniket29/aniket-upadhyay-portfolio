@@ -1,4 +1,4 @@
-// v=about-card-clearance-v5001
+// v=compact-about-card-clearance-v6001
 "use client";
 
 import React, { useState, useEffect } from "react";
