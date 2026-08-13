@@ -38,58 +38,13 @@ export default function ThoughtWidget() {
     <div
       style={{
         position: "absolute",
-        top: "24px",
+        top: "28px",
         left: "28px",
         zIndex: 50,
-        maxWidth: "300px",
+        maxWidth: "290px",
         pointerEvents: "auto",
-        display: "flex",
-        flexDirection: "column",
-        gap: "10px",
       }}
     >
-      {/* OPEN TO WORK Status Badge */}
-      <div
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "8px",
-          alignSelf: "flex-start",
-          background: "rgba(8, 12, 16, 0.75)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          border: "1px solid rgba(34, 197, 94, 0.35)",
-          borderRadius: "999px",
-          padding: "6px 14px",
-          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.6), 0 0 16px rgba(34, 197, 94, 0.15)",
-        }}
-      >
-        <span
-          style={{
-            width: "8px",
-            height: "8px",
-            borderRadius: "50%",
-            background: "#22c55e",
-            boxShadow: "0 0 10px #22c55e, 0 0 4px #4ade80",
-            display: "block",
-            animation: "pulse 1.6s ease-in-out infinite",
-          }}
-        />
-        <span
-          style={{
-            fontSize: "11px",
-            fontFamily: "monospace",
-            fontWeight: 700,
-            letterSpacing: "0.18em",
-            color: "#4ade80",
-            textTransform: "uppercase",
-            textShadow: "0 0 8px rgba(74, 222, 128, 0.4)",
-          }}
-        >
-          OPEN TO WORK
-        </span>
-      </div>
-
       {/* Glassmorphism Thought Card */}
       <div
         style={{

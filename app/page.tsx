@@ -1,4 +1,4 @@
-// v=solid-scroll-hero-music-player-v1003
+// v=status-widget-right-v1004
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -19,6 +19,7 @@ import LeetCodeActivityCard from "../components/leetcode/LeetCodeActivityCard";
 const VisitorCounterWidget = dynamic(() => import("../components/ui/VisitorCounterWidget"), { ssr: false });
 const ThoughtWidget = dynamic(() => import("../components/ui/ThoughtWidget"), { ssr: false });
 const SleekMusicPlayer = dynamic(() => import("../components/ui/SleekMusicPlayer"), { ssr: false });
+const StatusWidget = dynamic(() => import("../components/ui/StatusWidget"), { ssr: false });
 
 // Modals
 import ProjectsModalContent from "../components/modals/ProjectsModalContent";
@@ -68,6 +69,8 @@ export default function Home() {
         }}>
           {/* Animated Thought Widget - Top Left */}
           <ThoughtWidget />
+          {/* Status Widget (Open To Work, Building, Reading, Writing) - Top Right */}
+          <StatusWidget />
           {/* Sleek Music Player - Bottom Left */}
           <SleekMusicPlayer />
         </div>
