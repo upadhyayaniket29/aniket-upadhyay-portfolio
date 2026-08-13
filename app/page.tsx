@@ -1,4 +1,4 @@
-// v=about-window-card-v2001
+// v=hero-center-branding-v3001
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -22,6 +22,7 @@ const SleekMusicPlayer = dynamic(() => import("../components/ui/SleekMusicPlayer
 const StatusWidget = dynamic(() => import("../components/ui/StatusWidget"), { ssr: false });
 const TopBarHeaderV2 = dynamic(() => import("../components/ui/TopBarHeaderV2"), { ssr: false });
 const AboutWindowCard = dynamic(() => import("../components/ui/AboutWindowCard"), { ssr: false });
+const HeroCenterBranding = dynamic(() => import("../components/ui/HeroCenterBranding"), { ssr: false });
 
 // Modals
 import ProjectsModalContent from "../components/modals/ProjectsModalContent";
@@ -76,6 +77,8 @@ export default function Home() {
           <ThoughtWidget />
           {/* Status Widget (Open To Work, Building, Reading, Writing) - Top Right */}
           <StatusWidget />
+          {/* GenZ Bold Center Branding & Action Buttons */}
+          <HeroCenterBranding />
           {/* Sleek Music Player - Bottom Left */}
           <SleekMusicPlayer />
         </div>
