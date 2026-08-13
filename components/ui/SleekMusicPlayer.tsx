@@ -200,13 +200,13 @@ export default function SleekMusicPlayer() {
         }
       `}</style>
 
-      {/* Floating Modern Music Player Widget */}
+      {/* Floating Modern Music Player Widget - Absolute to Hero section only */}
       <div
         style={{
-          position: "fixed",
-          bottom: "90px",
+          position: "absolute",
+          bottom: "36px",
           left: "28px",
-          zIndex: 9999,
+          zIndex: 40,
           pointerEvents: "auto",
           width: expanded ? "300px" : "240px",
           transition: "width 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
