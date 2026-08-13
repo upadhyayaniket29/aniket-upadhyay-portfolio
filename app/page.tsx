@@ -1,4 +1,4 @@
-// v=responsive-all-devices-v7001
+// v=premium-typography-about-v8001
 "use client";
 
 import React, { useState, useEffect } from "react";
