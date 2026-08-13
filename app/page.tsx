@@ -49,26 +49,13 @@ export default function Home() {
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />
       
-      {/* Landing First Screen - 100% Complete Un-cropped Artwork Image View (object-contain) */}
-      <section className="relative w-full h-screen overflow-hidden bg-[#060404] flex items-center justify-center p-2 sm:p-4">
+      {/* Landing First Screen - 100% Full-Bleed Ultra-Cool Artwork (Perfect Orientation) */}
+      <section className="relative w-full h-screen overflow-hidden bg-[#060404] flex items-center justify-center">
         <img 
-          src="/hero-bg.jpg?v=6" 
+          src="/hero-bg.jpg?v=7" 
           alt="Developer Workspace Artwork" 
-          className="w-full h-full object-contain object-center max-h-[92vh]"
+          className="w-full h-full object-cover object-center"
         />
-
-        {/* Top Left Status Badge */}
-        <div className="absolute top-4 sm:top-6 left-4 sm:left-8 z-20 pointer-events-auto">
-          <div className="flex items-center gap-2.5 bg-black/50 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 shadow-xl">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5500] shadow-[0_0_12px_#ff5500] animate-pulse"></span>
-            <span className="text-[9px] sm:text-[10px] tracking-widest font-mono text-amber-100 uppercase font-bold">Open to SDE Opportunities</span>
-          </div>
-        </div>
-
-        {/* Top Right Visitor Counter & Clock Widget */}
-        <div className="absolute top-4 sm:top-6 right-4 sm:right-8 z-20 pointer-events-auto">
-          <VisitorCounterWidget />
-        </div>
       </section>
 
       {/* Developer Activity Section (GitHub & LeetCode) */}
