@@ -4,14 +4,14 @@ import React from "react";
 import { FileText, Rocket, Github, Linkedin, Twitter, Mail } from "lucide-react";
 import { useModal } from "../ModalProvider";
 
-export default function AboutWindowCard() {
+export default function AboutWindowCardV2() {
   const { setActiveModal } = useModal();
 
   return (
     <div
       style={{
         position: "absolute",
-        top: "47%",
+        top: "46%",
         left: "50%",
         transform: "translate(-50%, -50%)",
         zIndex: 30,
@@ -19,10 +19,11 @@ export default function AboutWindowCard() {
         width: "92%",
         maxWidth: "540px",
         userSelect: "none",
+        fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
       {/* Premium Glassmorphism IDE Window Frame */}
-      <div className="relative rounded-2xl bg-[#090b12]/85 backdrop-blur-2xl border border-white/12 shadow-[0_20px_60px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.1)] overflow-hidden font-sans">
+      <div className="relative rounded-2xl bg-[#090b12]/85 backdrop-blur-2xl border border-white/12 shadow-[0_20px_60px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.1)] overflow-hidden">
         
         {/* Window Top Titlebar */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-white/[0.03]">
@@ -47,15 +48,36 @@ export default function AboutWindowCard() {
           
           {/* Large Hero Name & Role Header */}
           <div className="space-y-2">
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.05] font-sans">
+            <h1
+              style={{
+                fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+                fontSize: "clamp(28px, 4vw, 44px)",
+                fontWeight: 800,
+                color: "#ffffff",
+                letterSpacing: "-0.02em",
+                lineHeight: 1.05,
+                margin: 0,
+              }}
+            >
               Aniket <br />
-              <span className="text-white">
+              <span style={{ color: "#ffffff" }}>
                 Upadhyay
               </span>
             </h1>
 
             {/* Subtitle / Role */}
-            <p className="font-mono text-[10px] sm:text-[11.5px] font-bold tracking-[0.16em] text-[#fb923c] uppercase pt-1">
+            <p
+              style={{
+                fontFamily: "monospace",
+                fontSize: "10.5px",
+                fontWeight: 700,
+                letterSpacing: "0.16em",
+                color: "#fb923c",
+                textTransform: "uppercase",
+                margin: 0,
+                paddingTop: "4px",
+              }}
+            >
               FULL-STACK DEVELOPER — AI, DISTRIBUTED SYSTEMS & WEB APPS
             </p>
           </div>
@@ -64,9 +86,19 @@ export default function AboutWindowCard() {
           <div className="h-px bg-white/10 w-full" />
 
           {/* Bio Text - Premium Sans Serif */}
-          <div className="text-zinc-200 text-[13px] sm:text-[14px] leading-[1.75] font-sans font-normal space-y-3">
-            <p>
-              Software engineer specializing in high-performance web applications, distributed infrastructure, and full-stack systems. Builds low-latency services, real-time data pipelines, and developer tooling in <span className="text-white font-semibold">TypeScript, Next.js 15, React, C++,</span> and <span className="text-white font-semibold">Python</span> — bridging complex backend architectures with sleek, intuitive user interfaces.
+          <div
+            style={{
+              fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+              fontSize: "13.5px",
+              color: "rgba(255, 255, 255, 0.85)",
+              lineHeight: 1.75,
+              fontWeight: 400,
+            }}
+          >
+            <p style={{ margin: 0 }}>
+              Software engineer specializing in high-performance web applications, distributed infrastructure, and full-stack systems. Builds low-latency services, real-time data pipelines, and developer tooling in{" "}
+              <span style={{ color: "#ffffff", fontWeight: 600 }}>TypeScript, Next.js 15, React, C++,</span> and{" "}
+              <span style={{ color: "#ffffff", fontWeight: 600 }}>Python</span> — bridging complex backend architectures with sleek, intuitive user interfaces.
             </p>
           </div>
 

@@ -1,4 +1,4 @@
-// v=premium-typography-about-v8001
+// v=about-window-card-v2-cachebreak-v999999
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -21,7 +21,7 @@ const ThoughtWidget = dynamic(() => import("../components/ui/ThoughtWidget"), { 
 const SleekMusicPlayer = dynamic(() => import("../components/ui/SleekMusicPlayer"), { ssr: false });
 const StatusWidget = dynamic(() => import("../components/ui/StatusWidget"), { ssr: false });
 const TopBarHeaderV2 = dynamic(() => import("../components/ui/TopBarHeaderV2"), { ssr: false });
-const AboutWindowCard = dynamic(() => import("../components/ui/AboutWindowCard"), { ssr: false });
+const AboutWindowCardV2 = dynamic(() => import("../components/ui/AboutWindowCardV2"), { ssr: false });
 
 // Modals
 import ProjectsModalContent from "../components/modals/ProjectsModalContent";
@@ -77,7 +77,7 @@ export default function Home() {
           {/* Status Widget (Open To Work, Building, Reading, Writing) - Top Right */}
           <StatusWidget />
           {/* IDE Window About Card - Center Landing Screen */}
-          <AboutWindowCard />
+          <AboutWindowCardV2 />
           {/* Sleek Music Player - Bottom Left */}
           <SleekMusicPlayer />
         </div>
