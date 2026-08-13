@@ -17,7 +17,7 @@ import GitHubActivityCard from "../components/github/GitHubActivityCard";
 import LeetCodeActivityCard from "../components/leetcode/LeetCodeActivityCard";
 const VisitorCounterWidget = dynamic(() => import("../components/ui/VisitorCounterWidget"), { ssr: false });
 const ThoughtWidget = dynamic(() => import("../components/ui/ThoughtWidget"), { ssr: false });
-const SpotifyWidget = dynamic(() => import("../components/ui/SpotifyWidget"), { ssr: false });
+const MusicWidget = dynamic(() => import("../components/ui/MusicWidget"), { ssr: false });
 
 // Modals
 import ProjectsModalContent from "../components/modals/ProjectsModalContent";
@@ -67,8 +67,8 @@ export default function Home() {
         }}>
           {/* Animated Thought Widget - Top Left */}
           <ThoughtWidget />
-          {/* Spotify Now Playing - Left Middle */}
-          <SpotifyWidget />
+          {/* Music Player Widget - Bottom Left */}
+          <MusicWidget />
         </div>
       </section>
 
