@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { useModal } from "../ModalProvider";
 
-export default function TopBarHeader() {
+export default function TopBarHeaderV2() {
   const { activeModal } = useModal();
   const [mounted, setMounted] = useState(false);
-  const [formattedTime, setFormattedTime] = useState("00:00");
+  const [formattedTime, setFormattedTime] = useState("00:22");
   const [formattedDate, setFormattedDate] = useState("Fri, Aug 14");
   const [views, setViews] = useState(10744);
 
@@ -52,7 +52,7 @@ export default function TopBarHeader() {
         day: "numeric",
       });
 
-      // Format 24h Time: 00:06
+      // Format 24h Time: 00:22
       const timeStr = now.toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
@@ -110,8 +110,8 @@ export default function TopBarHeader() {
         left: 0,
         right: 0,
         height: "34px",
-        zIndex: 9999,
-        background: "rgba(9, 11, 16, 0.65)",
+        zIndex: 99999,
+        background: "rgba(9, 11, 16, 0.75)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
@@ -145,7 +145,7 @@ export default function TopBarHeader() {
         </span>
       </div>
 
-      {/* Right side: ↑ 10,744    Fri, Aug 14    00:18 */}
+      {/* Right side: ↑ 10,744    Fri, Aug 14    00:22 */}
       <div style={{ display: "flex", alignItems: "center", gap: "22px" }}>
         {/* Visitors count */}
         <div style={{ display: "flex", alignItems: "center", gap: "5px", color: "rgba(255, 255, 255, 0.8)" }}>
@@ -166,7 +166,7 @@ export default function TopBarHeader() {
             textShadow: "0 0 10px rgba(249, 115, 22, 0.35)",
           }}
         >
-          {mounted ? formattedTime : "00:18"}
+          {mounted ? formattedTime : "00:22"}
         </div>
       </div>
     </header>

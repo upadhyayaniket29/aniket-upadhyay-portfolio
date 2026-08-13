@@ -38,7 +38,7 @@ export default function ThoughtWidget() {
     <div
       style={{
         position: "absolute",
-        top: "52px",
+        top: "54px",
         left: "28px",
         zIndex: 50,
         maxWidth: "290px",

@@ -1,4 +1,4 @@
-// v=top-bar-theme-fit-v1006
+// v=top-bar-header-v2-cachebreak-v99999
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -20,7 +20,7 @@ const VisitorCounterWidget = dynamic(() => import("../components/ui/VisitorCount
 const ThoughtWidget = dynamic(() => import("../components/ui/ThoughtWidget"), { ssr: false });
 const SleekMusicPlayer = dynamic(() => import("../components/ui/SleekMusicPlayer"), { ssr: false });
 const StatusWidget = dynamic(() => import("../components/ui/StatusWidget"), { ssr: false });
-const TopBarHeader = dynamic(() => import("../components/ui/TopBarHeader"), { ssr: false });
+const TopBarHeaderV2 = dynamic(() => import("../components/ui/TopBarHeaderV2"), { ssr: false });
 
 // Modals
 import ProjectsModalContent from "../components/modals/ProjectsModalContent";
@@ -52,7 +52,7 @@ export default function Home() {
     <div className="relative bg-[#090909] text-white overflow-x-hidden font-sans">
       
       {/* Top Header Bar (AU | Active Section , Visitor Count, Date, Live Time) */}
-      <TopBarHeader />
+      <TopBarHeaderV2 />
 
       {/* Apple VisionOS Floating Glass Scrollbar */}
       <GlassScrollbar />

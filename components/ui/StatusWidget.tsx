@@ -5,7 +5,7 @@ export default function StatusWidget() {
     <div
       style={{
         position: "absolute",
-        top: "52px",
+        top: "54px",
         right: "28px",
         zIndex: 40,
         width: "290px",
