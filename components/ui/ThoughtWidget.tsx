@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const THOUGHTS = [
   { quote: "Hard work beats talent when talent doesn't work hard.", tag: "FUEL" },
@@ -20,30 +20,16 @@ const INTERVAL = 4500;
 export default function ThoughtWidget() {
   const [current, setCurrent] = useState(0);
   const [fade, setFade] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const progressRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     const cycle = setInterval(() => {
-      // Fade out
       setFade(false);
-      setProgress(0);
-
       setTimeout(() => {
         setCurrent((prev) => (prev + 1) % THOUGHTS.length);
         setFade(true);
       }, 500);
     }, INTERVAL);
-
-    // Progress bar ticker
-    progressRef.current = setInterval(() => {
-      setProgress((p) => Math.min(p + 100 / (INTERVAL / 50), 100));
-    }, 50);
-
-    return () => {
-      clearInterval(cycle);
-      if (progressRef.current) clearInterval(progressRef.current);
-    };
+    return () => clearInterval(cycle);
   }, []);
 
   const thought = THOUGHTS[current];
@@ -131,25 +117,35 @@ export default function ThoughtWidget() {
           &ldquo;{thought.quote}&rdquo;
         </p>
 
-        {/* Progress bar */}
+        {/* Aniket signature */}
         <div
           style={{
             marginTop: "14px",
-            height: "2px",
-            borderRadius: "999px",
-            background: "rgba(255,255,255,0.1)",
-            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            opacity: fade ? 1 : 0,
+            transition: "opacity 0.45s cubic-bezier(0.16,1,0.3,1)",
           }}
         >
           <div
             style={{
-              height: "100%",
-              borderRadius: "999px",
+              width: "20px",
+              height: "1px",
               background: "linear-gradient(90deg, #f97316, #fbbf24)",
-              width: `${progress}%`,
-              transition: "width 50ms linear",
+              borderRadius: "999px",
             }}
           />
+          <span
+            style={{
+              fontSize: "11px",
+              color: "rgba(255,255,255,0.5)",
+              fontStyle: "italic",
+              letterSpacing: "0.04em",
+            }}
+          >
+            Aniket
+          </span>
         </div>
       </div>
     </div>
